@@ -7,12 +7,12 @@
   text-transform:capitalize;
 }
 #container {
-  margin:10px 10%;
   border:2px solid #000;
   border-radius: 5px;
   height:60vh;
+  max-width: 120vh;
   overflow:hidden;
-  background: #F0F8FF;
+  background: #fff;
 }
 .hidden { 
   display: none; 
@@ -38,7 +38,9 @@ div.tooltip {
   stroke-width: 1px;
 }
 
-.measure {
-  margin: 5px 5%;
+#measure {
+margin:5px; 
   border: 1px solid #000;
+  height:10vh;
+  max-width: 20vh; 
 }

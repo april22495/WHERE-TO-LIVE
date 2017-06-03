@@ -99,14 +99,14 @@ var boxData=
     {"rx":100, "ry":110, "height": 30, "width":30, "color":"blue"}
 ];
 
-/*
-var m_width= document.getElementById('measure').offsetWidth;
-var m_height=
-*/
-function measure_setup(width, height){
+
+var m_height= document.getElementById('measure').offsetHeight;
+var m_width=m_height*2;
+
+function measure_setup(w, h){
   m_svg= d3.select("#measure").append("svg")
-    .attr("width", m_width)
-    .attr("height",height);
+    .attr("width", w)
+    .attr("height",h);
   var m_g= m_svg.append("g");
   var rectangles= m_g.selectAll("rect")
     .data(boxData)
@@ -118,6 +118,9 @@ function measure_setup(width, height){
     .attr("width", function (d) { return d.width; })
     .style("fill", function(d) { return d.color; });
 }
+
+measure_setup(m_width, m_height);
+
 
 d3.json("data/world-topo-min.json", function(error, world) {
   var countries = topojson.feature(world, world.objects.countries).features;
