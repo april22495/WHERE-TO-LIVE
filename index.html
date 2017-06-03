@@ -15,6 +15,8 @@
 <script src="js/topojson.v1.min.js"></script>
 <script>
 
+
+
 var colorcode=
 ["#a50026","#d73027","#f46d43","#fdae61","#fee08b","#ffffbf","#d9ef8b","#a6d96a","#66bd63","#1a9850","#006837"]
 
@@ -75,6 +77,7 @@ var tooltip = d3.select("#container").append("div").attr("class", "tooltip hidde
 
 setup(width,height);
 
+
 function setup(width,height){
   projection = d3.geo.mercator()
     .translate([(width/2), (height/2)])
@@ -103,16 +106,18 @@ var boxData=
 var m_height= document.getElementById('measure').offsetHeight;
 var m_width=m_height*2;
 
+var m_svg, m_g, rectangles, rectangleAttributes;
+
 function measure_setup(w, h){
   m_svg= d3.select("#measure").append("svg")
     .attr("width", w)
     .attr("height",h);
-  var m_g= m_svg.append("g");
-  var rectangles= m_g.selectAll("rect")
+  m_g= m_svg.append("g");
+  rectangles= m_g.selectAll("rect")
     .data(boxData)
     .enter()
     .append("rect");
-  var rectangleAttributes = rectangles.attr("x", function (d) { return d.rx; })
+  rectangleAttributes = rectangles.attr("x", function (d) { return d.rx; })
     .attr("y", function (d) { return d.ry; })
     .attr("height", function (d) { return d.height; })
     .attr("width", function (d) { return d.width; })
@@ -121,7 +126,105 @@ function measure_setup(w, h){
 
 measure_setup(m_width, m_height);
 
+var slider = d3.select("#measure").append("p").append("input")
+  .attr("type", "range")
+  .attr("value", 0)
+  .attr("id", "slider")
+  .on("input", function(){
+      console.log(this.value);
+      update(this.value);
+    });
 
+function update(slider_value){
+  d3.select("#slider").attr("value", slider_value);
+}
+
+//slider 
+/*
+s_width= m_svg.attr("width")- 20;
+s_height= m_svg.attr("height");
+s_margin= {right:10, left: 10};
+
+var slide_x = d3.scale.linear()
+    .domain([0, 1])
+    .range([0, s_width])
+    .clamp(true);
+
+var drag = d3.behavior.drag()
+    .origin(function(d) { return d; })
+    .on("dragstart", dragstarted)
+    .on("drag", dragged)
+    .on("dragend", dragended);
+
+var slider = m_svg.append("g")
+    .attr("class", "slider")
+    .attr("transform", "translate(" + s_margin.left + "," + s_height / 2 + ")");
+
+slider.append("line")
+    .attr("class", "track")
+    .attr("x1", slide_x.range()[0])
+    .attr("x2", slide_x.range()[1])
+  .select(function() { return this.parentNode.appendChild(this.cloneNode(true)); })
+    .attr("class", "track-inset")
+  .select(function() { return this.parentNode.appendChild(this.cloneNode(true)); })
+    .attr("class", "track-overlay")
+    .call(d3.behavior.drag()
+        .on("start.interrupt", function() { slider.interrupt(); })
+        .on("start drag", function() { hue(slide_x.invert(d3.event.slide_x)); }));
+
+slider.insert("g", ".track-overlay")
+    .attr("class", "ticks")
+    .attr("transform", "translate(0," + 18 + ")")
+  .selectAll("text")
+  .data(slide_x.ticks(10))
+  .enter().append("text")
+    .attr("x", slide_x)
+    .attr("text-anchor", "middle")
+    .text(function(d) { return d + "°"; });
+
+var handle = slider.insert("circle", ".track-overlay")
+    .attr("class", "handle")
+    .attr("r", 9);
+
+slider.transition() // Gratuitous intro!
+    .duration(750)
+    .tween("hue", function() {
+      var i = d3.interpolate(0, 70);
+      return function(t) { hue(i(t)); };
+    });
+
+function hue(h) {
+  handle.attr("cx", slide_x(h));
+  m_svg.style("background-color", d3.hsl(h, 0.8, 0.8));
+}
+
+
+
+var zoom = d3.behavior.zoom()
+    .scaleExtent([1, 10])
+    .on("zoom", zoomed);
+
+var slider = d3.select("body").append("p").append("input")
+  .datum({})
+  .attr("type", "range")
+  .attr("value", zoom.scaleExtent()[0])
+  .attr("min", zoom.scaleExtent()[0])
+  .attr("max", zoom.scaleExtent()[1])
+  .attr("step", (zoom.scaleExtent()[1] - zoom.scaleExtent()[0]) / 100)
+  .on("input", slided);
+
+var svg = d3.select("body").append("svg")
+    .attr("width", width + margin.left + margin.right)
+    .attr("height", height + margin.top + margin.bottom)
+  .append("g")
+    .attr("transform", "translate(" + margin.left + "," + margin.right + ")")
+    .call(zoom);
+
+function slided(d){
+  zoom.scale(d3.select(this).property("value"))
+    .event(svg);
+}
+*/
 d3.json("data/world-topo-min.json", function(error, world) {
   var countries = topojson.feature(world, world.objects.countries).features;
   topo = countries;
