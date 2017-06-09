@@ -9,8 +9,39 @@
   <h1>Where To Live</h1>
   <p>Blah Blah Blah</p>
 
-  <div id="container"></div>
-  <div id="measure"></div>
+	<div id="container"></div>
+	<div class="row">
+		<div class="measure">
+			<p>Security</p>
+			<input type= "range" class= "slider">	
+		</div>
+		
+		<div class="measure">
+			<p>Cost of Living</p>
+			<input type= "range" class= "slider">	
+		</div>
+	
+		<div class="measure">
+			<p>Security</p>
+			<input type= "range" class= "slider">	
+		</div>
+		
+		<div class="measure">
+			<p>Cost of Living</p>
+			<input type= "range" class= "slider">	
+		</div>
+	
+		<div class="measure">
+			<p>Security</p>
+			<input type= "range" class= "slider">	
+		</div>
+		
+		<div class="measure">
+			<p>Cost of Living</p>
+			<input type= "range" class= "slider">	
+		</div>
+	
+	</div>
 <script src="js/d3.min.js"></script>
 <script src="js/topojson.v1.min.js"></script>
 <script>
@@ -97,55 +128,6 @@ function setup(width,height){
 
 }
 
-var boxData=
-[
-    {"rx":100, "ry":110, "height": 30, "width":30, "color":"blue"}
-];
-
-/*
-var m_height= document.getElementById('measure').offsetHeight;
-var m_width=m_height*2;
-
-var m_svg, m_g, rectangles, rectangleAttributes;
-
-function measure_setup(w, h){
-  m_svg= d3.select("#measure").append("svg")
-    .attr("width", w)
-    .attr("height",h);
-  m_g= m_svg.append("g");
-  rectangles= m_g.selectAll("rect")
-    .data(boxData)
-    .enter()
-    .append("rect");
-  rectangleAttributes = rectangles.attr("x", function (d) { return d.rx; })
-    .attr("y", function (d) { return d.ry; })
-    .attr("height", function (d) { return d.height; })
-    .attr("width", function (d) { return d.width; })
-    .style("fill", function(d) { return d.color; });
-}
-
-measure_setup(m_width, m_height);
-*/
-
-
-var slider = d3.select("#measure").append("p").append("input")
-  .attr("type", "range")
-  .attr("value", 0)
-  .attr("id", "slider")
-  .on("input", function(){
-      console.log(this.value);
-      update(this.value);
-    });
-
-function update(slider_value){
-  d3.select("#slider").attr("value", slider_value);
-}
-
-d3.json("data/world-topo-min.json", function(error, world) {
-  var countries = topojson.feature(world, world.objects.countries).features;
-  topo = countries;
-  draw(topo);
-});
 
 Array.prototype.contains = function(element) {
 	for (var i = 0; i < this.length; i++) {
