@@ -43,20 +43,22 @@ var oecd= [
 var clist={};
 var minlist={};
 var maxlist={};
+var indlist=[];
 
 getdata();
-normalize();
-inin();
+
+//normalize();
+//inin();
 function csv_parse(cname, dpath){
 	var obj= {"name": cname};
 
 	d3.csv(dpath, function (data){
 		data.forEach(function(d){
 			//console.log(data[0]);
-			var indicator= d.Indicator;
+			var indicator= d.INDICATOR;
 			d.Value= parseFloat(d.Value);
 			obj[indicator]= d.Value;
-
+			indlist.push(indicator);
 			//console.log(indicator);
 			if( ! (indicator in minlist) ) minlist[indicator]= d.Value;
 			else if( minlist[indicator] > d.Value) minlist[indicator]= d.Value;
@@ -67,19 +69,23 @@ function csv_parse(cname, dpath){
 			//clist[name]= new c_obj(d.Country, d.Value) ;
 			//console.log(clist.length);
 		});
+	console.log(obj);
+	console.log(Object.keys(obj));
+	//console.log(obj["Air pollution"]);
+	
 	});
-
-	return obj;
+	//console.log("MYSTERY~~~~");
+return obj;
 }
 
 function getdata(){
 	var i=0;
-	for (i=0; i< 5; i++){
+	for (i=0; i< 6; i++){
 		var cname= oecd[i];
 		var datapath= "data/"+ cname+".csv";
 		console.log(datapath);
+		obj={"name": cname};
 		var obj=csv_parse(cname, datapath);
-
 		clist[cname]= obj;
 		//console.log("i: "+ i+", "+cname);
 		//console.log("done");
@@ -88,18 +94,26 @@ function getdata(){
 }
 function inin(){
 	for(iii in minlist){
-		console.log(iii);
+		if(minlist.hasOwnProperty(iii)) console.log(iii);
+		else console.log("nope");
 	}
 }
 function normalize(){
-	for (c in clist){
+
+		Object.keys(clist).forEach(function (c, i){
+	//for (c in clist){
 		var cobj= clist[c];
 		//console.log(c);
-		console.log(cobj);
-		for (ind in Object.keys(cobj)){
-			cobj[ind]= ( cobj[ind]-minlist[ind] ) / (maxlist[ind]- minlist[ind]) ;
-		}
-	}
+		//console.log(Object.keys(cobj));
+		//for( var key in cobj){
+		//for (var key in Object.keys(cobj)){
+		/*cobj.forEach(function(key, index){
+		//Object.keys(cobj).forEach(function (key, index){
+			console.log(key);
+			cobj[key]= ( cobj[key]-minlist[key] ) / (maxlist[key]- minlist[key]) ;
+		});*/
+		//	(cobj["House expenditure"]-minlist["House expenditure"])/ (maxlist["House expenditure"]- minlist["House expenditure"]);
+	});
 }
 
 function c_obj(c_name, value1){
