@@ -1,0 +1,10 @@
+﻿"LOCATION","Country","INDICATOR","Indicator","MEASURE","Measure","INEQUALITY","Inequality","Unit Code","Unit","PowerCode Code","PowerCode","Reference Period Code","Reference Period","Value","Flag Codes","Flags"
+"AUS","Australia","HO_BASE","Dwellings without basic facilities","L","Value","TOT","Total","PC","Percentage","0","Units",,,1.1,"E","Estimated value"
+"AUT","Austria","HO_BASE","Dwellings without basic facilities","L","Value","TOT","Total","PC","Percentage","0","Units",,,1,,
+"BEL","Belgium","HO_BASE","Dwellings without basic facilities","L","Value","TOT","Total","PC","Percentage","0","Units",,,2.1,,
+"CAN","Canada","HO_BASE","Dwellings without basic facilities","L","Value","TOT","Total","PC","Percentage","0","Units",,,0.2,,
+"CZE","Czech Republic","HO_BASE","Dwellings without basic facilities","L","Value","TOT","Total","PC","Percentage","0","Units",,,0.7,,
+"DNK","Denmark","HO_BASE","Dwellings without basic facilities","L","Value","TOT","Total","PC","Percentage","0","Units",,,0.5,,
+"FIN","Finland","HO_BASE","Dwellings without basic facilities","L","Value","TOT","Total","PC","Percentage","0","Units",,,0.6,,
+"FRA","France","HO_BASE","Dwellings without basic facilities","L","Value","TOT","Total","PC","Percentage","0","Units",,,0.5,,
+"DEU","Germany","HO_BASE","Dwellings without basic facilities","L","Value","TOT","Total","PC","Percentage","0","Units",,,0,,
