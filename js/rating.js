@@ -45,37 +45,31 @@ var minlist={};
 var maxlist={};
 var indlist=[];
 
-getdata();
-
+//$.when(getdata()).then(normalize());
 //normalize();
-//inin();
+//normalize(getdata);
+getdata();
 function csv_parse(cname, dpath){
-	var obj= {"name": cname};
-
-	d3.csv(dpath, function (data){
-		data.forEach(function(d){
-			//console.log(data[0]);
-			var indicator= d.INDICATOR;
-			d.Value= parseFloat(d.Value);
-			obj[indicator]= d.Value;
-			indlist.push(indicator);
-			//console.log(indicator);
+	var obj={"name": cname};
+ 	d3.text(dpath, function(text){
+		d3.csv.parseRows(text , function(d,i){
+			//console.log(d[14]);
+			var indicator= d[3];
+			var value= parseFloat(d[14]);
+			obj[indicator]= value;
+		
+			indlist.push(indicator);	
 			if( ! (indicator in minlist) ) minlist[indicator]= d.Value;
 			else if( minlist[indicator] > d.Value) minlist[indicator]= d.Value;
-			
+
 			if( ! (indicator in maxlist) ) maxlist[indicator]= d.Value;
 			else if( maxlist[indicator] < d.Value) maxlist[indicator]= d.Value;
-			//name= d.Country;
-			//clist[name]= new c_obj(d.Country, d.Value) ;
-			//console.log(clist.length);
+
 		});
-	console.log(obj);
-	console.log(Object.keys(obj));
-	//console.log(obj["Air pollution"]);
-	
+		console.log(obj);
+		//normalize();
 	});
-	//console.log("MYSTERY~~~~");
-return obj;
+		return obj;
 }
 
 function getdata(){
@@ -83,37 +77,24 @@ function getdata(){
 	for (i=0; i< 6; i++){
 		var cname= oecd[i];
 		var datapath= "data/"+ cname+".csv";
-		console.log(datapath);
 		obj={"name": cname};
 		var obj=csv_parse(cname, datapath);
 		clist[cname]= obj;
-		//console.log("i: "+ i+", "+cname);
-		//console.log("done");
-		//looparound();
 	}
 }
-function inin(){
-	for(iii in minlist){
-		if(minlist.hasOwnProperty(iii)) console.log(iii);
-		else console.log("nope");
-	}
-}
-function normalize(){
 
-		Object.keys(clist).forEach(function (c, i){
-	//for (c in clist){
+function normalize(callback){
+	callback();
+	for (c in clist){
 		var cobj= clist[c];
-		//console.log(c);
-		//console.log(Object.keys(cobj));
-		//for( var key in cobj){
-		//for (var key in Object.keys(cobj)){
-		/*cobj.forEach(function(key, index){
-		//Object.keys(cobj).forEach(function (key, index){
-			console.log(key);
-			cobj[key]= ( cobj[key]-minlist[key] ) / (maxlist[key]- minlist[key]) ;
-		});*/
-		//	(cobj["House expenditure"]-minlist["House expenditure"])/ (maxlist["House expenditure"]- minlist["House expenditure"]);
-	});
+		console.log(Object.keys(cobj));
+		for( var key in cobj){
+			if(maxlist[key]-minlist[key]!=0) {
+				console.log("c:"+c+"/ key: "+key);
+				cobj[key]= ( cobj[key]-minlist[key] ) / (maxlist[key]- minlist[key]) ;
+			}
+		}
+	}
 }
 
 function c_obj(c_name, value1){

@@ -1,5 +1,4 @@
-﻿"LOCATION","Country","INDICATOR","Indicator","MEASURE","Measure","INEQUALITY","Inequality","Unit Code","Unit","PowerCode Code","PowerCode","Reference Period Code","Reference Period","Value","Flag Codes","Flags"
-"GRC","Greece","HO_BASE","Dwellings without basic facilities","L","Value","TOT","Total","PC","Percentage","0","Units",,,0.5,,
+﻿"GRC","Greece","HO_BASE","Dwellings without basic facilities","L","Value","TOT","Total","PC","Percentage","0","Units",,,0.5,,
 "GRC","Greece","HO_HISH","Housing expenditure","L","Value","TOT","Total","PC","Percentage","0","Units",,,26,,
 "GRC","Greece","HO_NUMR","Rooms per person","L","Value","TOT","Total","RATIO","Ratio","0","Units",,,1.2,,
 "GRC","Greece","IW_HADI","Household net adjusted disposable income","L","Value","TOT","Total","USD","US Dollar","0","Units",,,18099,,

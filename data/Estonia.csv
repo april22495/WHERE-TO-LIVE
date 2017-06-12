@@ -1,5 +1,4 @@
-﻿"LOCATION","Country","INDICATOR","Indicator","MEASURE","Measure","INEQUALITY","Inequality","Unit Code","Unit","PowerCode Code","PowerCode","Reference Period Code","Reference Period","Value","Flag Codes","Flags"
-"EST","Estonia","HO_BASE","Dwellings without basic facilities","L","Value","TOT","Total","PC","Percentage","0","Units",,,7.2,,
+﻿"EST","Estonia","HO_BASE","Dwellings without basic facilities","L","Value","TOT","Total","PC","Percentage","0","Units",,,7.2,,
 "EST","Estonia","HO_HISH","Housing expenditure","L","Value","TOT","Total","PC","Percentage","0","Units",,,19,,
 "EST","Estonia","HO_NUMR","Rooms per person","L","Value","TOT","Total","RATIO","Ratio","0","Units",,,1.6,,
 "EST","Estonia","IW_HADI","Household net adjusted disposable income","L","Value","TOT","Total","USD","US Dollar","0","Units",,,16565,,
