@@ -40,15 +40,21 @@ var oecd= [
   "Slovenia"
 ]
 
+var indlist= ["HO_BASE", "HO_HISH", "HO_NUMR", "IW_HADI", "IW_HNFW", "JE_EMPL", "JE_LTUR", "JE_PEARN", "SC_SNTWS", "ES_EDUA", "ES_STCS", "ES_EDUEX", "EQ_AIRP", "EQ_WATER", "CG_VOTO", "HS_LEB", "HS_SFRH", "SW_LIFS", "PS_REPH", "WL_EWLH", "WL_TNOW", "JE_LMIS", "CG_SENG", "PS_FSAFEN"];
+
 var clist={};
 var minlist={};
 var maxlist={};
-var indlist=[];
 
+init_minmax();
 //$.when(getdata()).then(normalize());
 //normalize();
 //normalize(getdata);
-getdata();
+getdata(true).then(function(){
+	console.log("THEN");
+	normalize();
+});
+/*
 function csv_parse(cname, dpath){
 	var obj={"name": cname};
  	d3.text(dpath, function(text){
@@ -82,15 +88,73 @@ function getdata(){
 		clist[cname]= obj;
 	}
 }
+*/
+/*
+function getdata(){
+	var i=0;
+	d3.csv("data/reOECD.csv", function(data){
+		data.forEach(function(d){
+			return d.map(Float);
+		});
+	},function(data){
+		var cname= oecd[i];
+		clist[cname]= data;
+		i=i+1;
+		console.log(data);
+	}
+	);
+}
+*/
+function init_minmax(){
+	for (i=0; i< indlist.length; i++){
+		var ind= indlist[i];
+		minlist[ind]= 10000000;
+		maxlist[ind]= -100000000;
+	}
+}
 
-function normalize(callback){
-	callback();
+function getdata(param){
+	return new Promise(function(resolve, reject){
+		//do stuff
+		var i=0;
+		d3.csv("data/reOECD.csv", function(err, data){
+			//console.log(data[0]);
+			data.forEach(function(d,i){
+				var cname= oecd[i];
+				clist[cname]= data[i];
+				//console.log(d3.keys(d));	
+				//console.log(d);
+				for(var i=0; i < d3.keys(d).length; i++){
+					var ind= d3.keys(d)[i];
+					var newvalue= parseFloat(d3.values(d)[i]);
+					var minvalue= parseFloat(minlist[ind]);
+					var maxvalue= parseFloat(maxlist[ind]);
+					console.log("max: "+ maxlist[ind]+"/min: "+ minlist[ind]+"/"+ d3.values(d)[i]+"\n");
+					if(minvalue> newvalue ) minlist[ind]= newvalue;
+					if(maxvalue< newvalue ) maxlist[ind]= newvalue;
+					console.log("AFTER, max: " + maxlist[ind] + "/ min: "+ minlist[ind]);
+				}
+			});
+			if(err) reject(Error("FAIL"));
+			else resolve("result");
+		});
+
+	});
+}
+
+function normalize(){
+	console.log("normalize-------------\n");
+	console.log(clist);
+	//console.log(clist===undefined);
+	//console.log(clist===null);
+	//console.log(clist==={});
+	
 	for (c in clist){
 		var cobj= clist[c];
 		console.log(Object.keys(cobj));
 		for( var key in cobj){
 			if(maxlist[key]-minlist[key]!=0) {
-				console.log("c:"+c+"/ key: "+key);
+				console.log("c:"+c+"/ key: "+key+ "/cobj: "+cobj[key]+ "/max: "+ maxlist[key]+ "/min: "+ minlist[key]);
 				cobj[key]= ( cobj[key]-minlist[key] ) / (maxlist[key]- minlist[key]) ;
 			}
 		}
