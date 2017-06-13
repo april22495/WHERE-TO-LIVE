@@ -1,0 +1,25 @@
+﻿"LOCATION","Country","INDICATOR","Indicator","MEASURE","Measure","INEQUALITY","Inequality","Unit Code","Unit","PowerCode Code","PowerCode","Reference Period Code","Reference Period","Value","Flag Codes","Flags"
+"ISR","Israel","HO_BASE","Dwellings without basic facilities","L","Value","TOT","Total","PC","Percentage","0","Units",,,4.4,"E","Estimated value"
+"ISR","Israel","HO_HISH","Housing expenditure","L","Value","TOT","Total","PC","Percentage","0","Units",,,21,"E","Estimated value"
+"ISR","Israel","HO_NUMR","Rooms per person","L","Value","TOT","Total","RATIO","Ratio","0","Units",,,1.2,,
+"ISR","Israel","IW_HADI","Household net adjusted disposable income","L","Value","TOT","Total","USD","US Dollar","0","Units",,,22116,"E","Estimated value"
+"ISR","Israel","IW_HNFW","Household net financial wealth","L","Value","TOT","Total","USD","US Dollar","0","Units",,,50051,,
+"ISR","Israel","JE_EMPL","Employment rate","L","Value","TOT","Total","PC","Percentage","0","Units",,,68,,
+"ISR","Israel","JE_LTUR","Long-term unemployment rate","L","Value","TOT","Total","PC","Percentage","0","Units",,,0.63,,
+"ISR","Israel","JE_PEARN","Personal earnings","L","Value","TOT","Total","USD","US Dollar","0","Units",,,29635,,
+"ISR","Israel","SC_SNTWS","Quality of support network","L","Value","TOT","Total","PC","Percentage","0","Units",,,86,,
+"ISR","Israel","ES_EDUA","Educational attainment","L","Value","TOT","Total","PC","Percentage","0","Units",,,85,,
+"ISR","Israel","ES_STCS","Student skills","L","Value","TOT","Total","AVSCORE","Average score","0","Units",,,474,,
+"ISR","Israel","ES_EDUEX","Years in education","L","Value","TOT","Total","YR","Years","0","Units",,,15.9,,
+"ISR","Israel","EQ_AIRP","Air pollution","L","Value","TOT","Total","MICRO_M3","Micrograms per cubic metre","0","Units",,,26,,
+"ISR","Israel","EQ_WATER","Water quality","L","Value","TOT","Total","PC","Percentage","0","Units",,,65,,
+"ISR","Israel","CG_VOTO","Voter turnout","L","Value","TOT","Total","PC","Percentage","0","Units",,,72,,
+"ISR","Israel","HS_LEB","Life expectancy","L","Value","TOT","Total","YR","Years","0","Units",,,82.1,,
+"ISR","Israel","HS_SFRH","Self-reported health","L","Value","TOT","Total","PC","Percentage","0","Units",,,80,,
+"ISR","Israel","SW_LIFS","Life satisfaction","L","Value","TOT","Total","AVSCORE","Average score","0","Units",,,7.1,,
+"ISR","Israel","PS_REPH","Homicide rate","L","Value","TOT","Total","RATIO","Ratio","0","Units",,,1.8,,
+"ISR","Israel","WL_EWLH","Employees working very long hours","L","Value","TOT","Total","PC","Percentage","0","Units",,,14.74,,
+"ISR","Israel","WL_TNOW","Time devoted to leisure and personal care","L","Value","TOT","Total","HOUR","Hours","0","Units",,,13.94,"E","Estimated value"
+"ISR","Israel","JE_LMIS","Labour market insecurity","L","Value","TOT","Total","PC","Percentage","0","Units",,,3.9,,
+"ISR","Israel","CG_SENG","Stakeholder engagement for developing regulations","L","Value","TOT","Total","AVSCORE","Average score","0","Units",,,0.9,,
+"ISR","Israel","PS_FSAFEN","Feeling safe walking alone at night","L","Value","TOT","Total","PC","Percentage","0","Units",,,66.3,,

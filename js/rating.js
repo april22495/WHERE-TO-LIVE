@@ -42,69 +42,62 @@ var oecd= [
 
 var indlist= ["HO_BASE", "HO_HISH", "HO_NUMR", "IW_HADI", "IW_HNFW", "JE_EMPL", "JE_LTUR", "JE_PEARN", "SC_SNTWS", "ES_EDUA", "ES_STCS", "ES_EDUEX", "EQ_AIRP", "EQ_WATER", "CG_VOTO", "HS_LEB", "HS_SFRH", "SW_LIFS", "PS_REPH", "WL_EWLH", "WL_TNOW", "JE_LMIS", "CG_SENG", "PS_FSAFEN"];
 
+var measure_list= ["Housing", "Jobs", "Education", "Civic_Engagement", "Life_Satisfaction", "Work_Life_Balance", "Income", "community", "Environment", "Health", "Safety"];
+
+var Housing_list= ["HO_BASE", "HO_HISH", "HO_NUMR"];
+var Income_list= ["IW_HADI", "IW_HNFW"];
+var Jobs_list= ["JE_EMPL", "JE_LTUR", "JE_PEARN", "JE_LMIS"];
+var Community_list= ["SC_SNTWS"];
+var Education_list= ["ES_EDUA", "ES_STCS", "ES_EDUEX"];
+var Environment_list= ["EQ_AIRP", "EQ_WATER"];
+var Civic_Engagement_list= ["CG_VOTO", "CG_SENG"];
+var Health_list= ["HS_LEB", "HS_SFRH"];
+var Life_Satisfaction_list= ["SW_LIFS"];
+var Saftey_list= ["PS_REPH", "PS_FSAFEN"];
+var Work_Life_Balance_list= ["WL_EWLH", "WL_TNOW"];
+
+var measure_list= 
+{"Housing": ["HO_BASE", "HO_HISH", "HO_NUMR"], 
+	"Jobs": ["JE_EMPL", "JE_LTUR", "JE_PEARN", "JE_LMIS"],
+	"Education": ["ES_EDUA", "ES_STCS", "ES_EDUEX"],
+	"Civic_Engagement": ["CG_VOTO", "CG_SENG"],
+	"Life_Satisfaction": ["SW_LIFS"],
+	"Work-Life_Balance": ["WL_EWLH", "WL_TNOW"],
+	"Income":["IW_HADI", "IW_HNFW"], 
+	"Community":["SC_SNTWS"],
+	"Environment": ["EQ_AIRP", "EQ_WATER"],
+	"Health":["HS_LEB", "HS_SFRH"],
+	"Safety":["PS_REPH", "PS_FSAFEN"]
+};
+
+var prev_measure_value=
+["Housing":50 , "Jobs":50, "Education":50, "Civic_Engagement":50, "Life_Satisfaction":50, "Work_Life_Balance":50, "Income":50, "community":50, "Environment":50, "Health":50, "Safety":50];
+
+
 var clist={};
 var minlist={};
 var maxlist={};
 
-init_minmax();
-//$.when(getdata()).then(normalize());
-//normalize();
-//normalize(getdata);
-getdata(true).then(function(){
-	console.log("THEN");
-	normalize();
+$(document).ready(function(){
+	resetPage();
 });
-/*
-function csv_parse(cname, dpath){
-	var obj={"name": cname};
- 	d3.text(dpath, function(text){
-		d3.csv.parseRows(text , function(d,i){
-			//console.log(d[14]);
-			var indicator= d[3];
-			var value= parseFloat(d[14]);
-			obj[indicator]= value;
-		
-			indlist.push(indicator);	
-			if( ! (indicator in minlist) ) minlist[indicator]= d.Value;
-			else if( minlist[indicator] > d.Value) minlist[indicator]= d.Value;
 
-			if( ! (indicator in maxlist) ) maxlist[indicator]= d.Value;
-			else if( maxlist[indicator] < d.Value) maxlist[indicator]= d.Value;
-
-		});
-		console.log(obj);
-		//normalize();
-	});
-		return obj;
-}
-
-function getdata(){
-	var i=0;
-	for (i=0; i< 6; i++){
-		var cname= oecd[i];
-		var datapath= "data/"+ cname+".csv";
-		obj={"name": cname};
-		var obj=csv_parse(cname, datapath);
-		clist[cname]= obj;
+function resetPage(){
+	var sliders= document.getElementsByClassName("slider");
+	for(var i=0; i< sliders.length; i++){
+		sliders[i].value= 50;
+		console.log(sliders[i].value);
 	}
 }
-*/
-/*
-function getdata(){
-	var i=0;
-	d3.csv("data/reOECD.csv", function(data){
-		data.forEach(function(d){
-			return d.map(Float);
-		});
-	},function(data){
-		var cname= oecd[i];
-		clist[cname]= data;
-		i=i+1;
-		console.log(data);
-	}
-	);
-}
-*/
+
+init_minmax();
+getdata(true).then(function(){
+	//console.log("THEN");
+	normalize();
+	calculate_measure();
+});
+
+
 function init_minmax(){
 	for (i=0; i< indlist.length; i++){
 		var ind= indlist[i];
@@ -129,10 +122,10 @@ function getdata(param){
 					var newvalue= parseFloat(d3.values(d)[i]);
 					var minvalue= parseFloat(minlist[ind]);
 					var maxvalue= parseFloat(maxlist[ind]);
-					console.log("max: "+ maxlist[ind]+"/min: "+ minlist[ind]+"/"+ d3.values(d)[i]+"\n");
+				//	console.log("max: "+ maxlist[ind]+"/min: "+ minlist[ind]+"/"+ d3.values(d)[i]+"\n");
 					if(minvalue> newvalue ) minlist[ind]= newvalue;
 					if(maxvalue< newvalue ) maxlist[ind]= newvalue;
-					console.log("AFTER, max: " + maxlist[ind] + "/ min: "+ minlist[ind]);
+				//	console.log("AFTER, max: " + maxlist[ind] + "/ min: "+ minlist[ind]);
 				}
 			});
 			if(err) reject(Error("FAIL"));
@@ -145,18 +138,37 @@ function getdata(param){
 function normalize(){
 	console.log("normalize-------------\n");
 	console.log(clist);
-	//console.log(clist===undefined);
-	//console.log(clist===null);
-	//console.log(clist==={});
 	
 	for (c in clist){
 		var cobj= clist[c];
 		console.log(Object.keys(cobj));
 		for( var key in cobj){
 			if(maxlist[key]-minlist[key]!=0) {
-				console.log("c:"+c+"/ key: "+key+ "/cobj: "+cobj[key]+ "/max: "+ maxlist[key]+ "/min: "+ minlist[key]);
+				//console.log("c:"+c+"/ key: "+key+ "/cobj: "+cobj[key]+ "/max: "+ maxlist[key]+ "/min: "+ minlist[key]);
 				cobj[key]= ( cobj[key]-minlist[key] ) / (maxlist[key]- minlist[key]) ;
 			}
+		}
+	}
+
+	//country_score();
+}
+
+function calculate_measure(){
+	console.log("calculate_measure-----------------");
+	for (c in clist){
+		var cobj= clist[c];
+		//console.log(Object.keys(measure_list));
+		for (var measure in measure_list){
+			var measure_avg= 0;
+			for (i=0 ;i < (measure_list[measure]).length; i++){
+			//for( indicator in measure_list[measure]){
+			  var indicator= (measure_list[measure])[i];
+				//console.log(indicator);
+				measure_avg+= cobj[indicator];
+			}
+			//console.log("measure:" + measure);
+			measure_avg= measure_avg/ (measure_list[measure].length);
+			cobj[measure]= measure_avg;
 		}
 	}
 }
@@ -240,9 +252,45 @@ function hasOwnProperty(obj, prop) {
 						        (!(prop in proto) || proto[prop] !== obj[prop]);
 }
 
-function score(cname){
+function country_score(cname){	
+	console.log("country_score called");
+	var cobj= clist[cname];
+	var score= 0;
+	for (i=0; i< 2; i++){//(Object.keys(measure_list)).length; i++){
+		var ind= Object.keys(measure_list)[i];	
+		var weight= document.getElementById(ind).value;
+		var val= cobj[ind];
+		score+= weight* val;
+		console.log(ind+"	value= "+val+", weight= "+weight);
+	}
+	score= score/(Object.keys(measure_list)).length; 
+	score= score/100.0
+	console.log("Total score: "+ score);
+	return score;
+}
+console.log("length: "+measure_list.length);
+
+console.log("indlist:"+indlist.length);
+var measure= document.getElementsByClassName("measure");
+for(var i=0; i<measure.length; i++){
+	//console.log(measure[i]);
+	measure[i].addEventListener("input", incremental_score_change);
+
 }
 
+//document.getElementById("HO_BASE").addEventListener("input", incremental_score_change);
+
+function incremental_score_change(){
+	console.log("onchange!");
+	var change_id= this.id;
+	var prev= prev_measure_list[change_id];
+	var cur= this.value;
+	prev_measure_list[change_id]= cur;
+	for(c in clist){
+		var cobj= clist[c];
+		
+	}
+}
 //draw the map
 function draw(topo) {
 
@@ -261,6 +309,11 @@ function draw(topo) {
 
   var country = g.selectAll(".country").data(topo);
 
+	var color = d3. scale.linear()
+		.domain([0, 0.1 , 0.2, 0.3, 0.4, 0.5, 0.6, 0.7, 0.8, 0.9, 1])
+		.range( ["#a50026","#d73027","#f46d43","#fdae61","#fee08b","#ffffbf","#d9ef8b","#a6d96a","#66bd63","#1a9850","#006837"] );
+
+
   country.enter().insert("path")
       .attr("class", "country")
       .attr("d", path)
@@ -268,12 +321,19 @@ function draw(topo) {
       .attr("title", function(d,i) { return d.properties.name; })
       .style("fill", function(d, i) { 
         if(oecd.contains(d.properties.name)) {
-          c=c+1;
+          var cobj= clist[d.properties.name];
+					if(cobj=== undefined) return d.properties.color;
+					//var value= parseFloat(cobj["ES_EDUA"]);
+					var value= country_score(d.properties.name);
+					//console.log(value);
+					return color(value);
+					/*c=c+1;
 					name = d.properties.name;
 					if(hasOwnProperty(clist, name)){
 						//console.log(clist[name]);
 					}
           return d.properties.color;
+					*/
         }
         else return "#f0f8ff";
 			})
@@ -386,4 +446,5 @@ function addpoint(lat,lon,text) {
   }
 
 }
+
 
