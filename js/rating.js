@@ -70,8 +70,10 @@ var m_ind_list=
 	"Safety":["PS_REPH", "PS_FSAFEN"]
 };
 
-var prev_measure_value=
-{"Housing":50 , "Jobs":50, "Education":50, "Civic_Engagement":50, "Life_Satisfaction":50, "Work_Life_Balance":50, "Income":50, "community":50, "Environment":50, "Health":50, "Safety":50};
+var negative_ind_list=["HO_BASE","HO_HISH","JE_LTUR","EQ_AIRP","PS_REPH", "WL_EWLH", "JE_LMIS"];
+
+var prev_weights=
+{"Housing":50 , "Jobs":50, "Education":50, "Civic_Engagement":50, "Life_Satisfaction":50, "Work_Life_Balance":50, "Income":50, "Community":50, "Environment":50, "Health":50, "Safety":50};
 
 var weight_sum=0;
 
@@ -149,6 +151,7 @@ function normalize(){
 				//console.log("c:"+c+"/ key: "+key+ "/cobj: "+cobj[key]+ "/max: "+ maxlist[key]+ "/min: "+ minlist[key]);
 				cobj[key]= ( cobj[key]-minlist[key] ) / (maxlist[key]- minlist[key]) ;
 			}
+			if(negative_ind_list.indexOf(key)> -1) cobj[key]= 1- cobj[key];
 		}
 	}
 
@@ -289,27 +292,66 @@ function init_score(){
 	}
 }
 
-console.log("indlist:"+indlist.length);
-var measure= document.getElementsByClassName("measure");
-for(var i=0; i<measure.length; i++){
-	//console.log(measure[i]);
-	measure[i].addEventListener("input", incremental_score_change);
+
+var slider_bars= document.getElementsByClassName("slider");
+for(var i=0; i<slider_bars.length; i++){
+	console.log("SLIDER BAR");
+	slider_bars[i].addEventListener("input", function(e) {incremental_score_change.call(this);} );
 
 }
 
 //document.getElementById("HO_BASE").addEventListener("input", incremental_score_change);
 
 function incremental_score_change(){
-	console.log("onchange!");
 	var change_id= this.id;
-	var prev= prev_measure_list[change_id];
+	//	var change_id= change_obj.id; 
+	var prev= prev_weights[change_id];
 	var cur= this.value;
-	prev_measure_list[change_id]= cur;
+	prev_weights[change_id]= cur;
+
+	weight_sum+= (cur-prev);
+	console.log("CHANGE: "+change_id);
 	for(c in clist){
+		console.log(c);
 		var cobj= clist[c];
-		
+		cobj["Raw_Score"]+= (cur-prev)* cobj[change_id];
 	}
+	recolor();
+
+	//redraw();
 }
+
+var color = d3. scale.linear()
+.domain([0, 0.1 , 0.2, 0.3, 0.4, 0.5, 0.6, 0.7, 0.8, 0.9, 1])
+.range( ["#a50026","#d73027","#f46d43","#fdae61","#fee08b","#ffffbf","#d9ef8b","#a6d96a","#66bd63","#1a9850","#006837"] );
+
+
+	function recolor(){
+		console.log("RECOLOR");
+		for(c in clist){
+			var cobj= clist[c];
+			var cid= cobj["ID"];
+			//console.log(d3.selectAll("path.country")[0][cid]);
+			var item= d3.selectAll("path.country")[0][cid];	
+			var newcolor= color( cobj["Raw_Score"]/ weight_sum);
+			item.setAttribute("style", "fill: "+newcolor);
+
+			/*
+				.style("fill", function(d, i){
+					return color( cobj["Raw_Score"]/ weight_sum);
+				});
+
+			
+			d3.select(".country")[c]
+				.attr("fill", color( cobj["Raw_Score"]/ weight_sum)); */
+
+
+			/*var d3_cobj= "\"country#"+c+"\"";
+			d3.select(d3_cobj)
+				.attr("fill", color( cobj["Raw_Score"]/ weight_sum));*/
+		}
+	}
+
 //draw the map
 function draw(topo) {
 
@@ -328,10 +370,6 @@ function draw(topo) {
 
   var country = g.selectAll(".country").data(topo);
 
-	var color = d3. scale.linear()
-		.domain([0, 0.1 , 0.2, 0.3, 0.4, 0.5, 0.6, 0.7, 0.8, 0.9, 1])
-		.range( ["#a50026","#d73027","#f46d43","#fdae61","#fee08b","#ffffbf","#d9ef8b","#a6d96a","#66bd63","#1a9850","#006837"] );
-
 
   country.enter().insert("path")
       .attr("class", "country")
@@ -341,6 +379,7 @@ function draw(topo) {
       .style("fill", function(d, i) { 
         if(oecd.contains(d.properties.name)) {
           var cobj= clist[d.properties.name];
+					cobj["ID"]= d.id;
 					if(cobj=== undefined) return d.properties.color;
 					//var value= country_score(d.properties.name);
 					var value= cobj["Raw_Score"]/ weight_sum;
