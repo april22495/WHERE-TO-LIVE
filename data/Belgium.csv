@@ -1,4 +1,5 @@
-﻿"BEL","Belgium","HO_BASE","Dwellings without basic facilities","L","Value","TOT","Total","PC","Percentage","0","Units",,,2.1,,
+﻿"LOCATION","Country","INDICATOR","Indicator","MEASURE","Measure","INEQUALITY","Inequality","Unit Code","Unit","PowerCode Code","PowerCode","Reference Period Code","Reference Period","Value","Flag Codes","Flags"
+"BEL","Belgium","HO_BASE","Dwellings without basic facilities","L","Value","TOT","Total","PC","Percentage","0","Units",,,2.1,,
 "BEL","Belgium","HO_HISH","Housing expenditure","L","Value","TOT","Total","PC","Percentage","0","Units",,,21,,
 "BEL","Belgium","HO_NUMR","Rooms per person","L","Value","TOT","Total","RATIO","Ratio","0","Units",,,2.2,,
 "BEL","Belgium","IW_HADI","Household net adjusted disposable income","L","Value","TOT","Total","USD","US Dollar","0","Units",,,28700,,

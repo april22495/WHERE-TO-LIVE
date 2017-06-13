@@ -1,0 +1,25 @@
+﻿"LOCATION","Country","INDICATOR","Indicator","MEASURE","Measure","INEQUALITY","Inequality","Unit Code","Unit","PowerCode Code","PowerCode","Reference Period Code","Reference Period","Value","Flag Codes","Flags"
+"RUS","Russia","HO_BASE","Dwellings without basic facilities","L","Value","TOT","Total","PC","Percentage","0","Units",,,14.4,,
+"RUS","Russia","HO_HISH","Housing expenditure","L","Value","TOT","Total","PC","Percentage","0","Units",,,11,,
+"RUS","Russia","HO_NUMR","Rooms per person","L","Value","TOT","Total","RATIO","Ratio","0","Units",,,0.9,,
+"RUS","Russia","IW_HADI","Household net adjusted disposable income","L","Value","TOT","Total","USD","US Dollar","0","Units",,,17006,,
+"RUS","Russia","IW_HNFW","Household net financial wealth","L","Value","TOT","Total","USD","US Dollar","0","Units",,,3687,"E","Estimated value"
+"RUS","Russia","JE_EMPL","Employment rate","L","Value","TOT","Total","PC","Percentage","0","Units",,,69,,
+"RUS","Russia","JE_LTUR","Long-term unemployment rate","L","Value","TOT","Total","PC","Percentage","0","Units",,,1.45,,
+"RUS","Russia","JE_PEARN","Personal earnings","L","Value","TOT","Total","USD","US Dollar","0","Units",,,26977,"E","Estimated value"
+"RUS","Russia","SC_SNTWS","Quality of support network","L","Value","TOT","Total","PC","Percentage","0","Units",,,91,,
+"RUS","Russia","ES_EDUA","Educational attainment","L","Value","TOT","Total","PC","Percentage","0","Units",,,95,,
+"RUS","Russia","ES_STCS","Student skills","L","Value","TOT","Total","AVSCORE","Average score","0","Units",,,481,,
+"RUS","Russia","ES_EDUEX","Years in education","L","Value","TOT","Total","YR","Years","0","Units",,,16.1,,
+"RUS","Russia","EQ_AIRP","Air pollution","L","Value","TOT","Total","MICRO_M3","Micrograms per cubic metre","0","Units",,,14,,
+"RUS","Russia","EQ_WATER","Water quality","L","Value","TOT","Total","PC","Percentage","0","Units",,,49,,
+"RUS","Russia","CG_VOTO","Voter turnout","L","Value","TOT","Total","PC","Percentage","0","Units",,,65,,
+"RUS","Russia","HS_LEB","Life expectancy","L","Value","TOT","Total","YR","Years","0","Units",,,70.7,,
+"RUS","Russia","HS_SFRH","Self-reported health","L","Value","TOT","Total","PC","Percentage","0","Units",,,39,,
+"RUS","Russia","SW_LIFS","Life satisfaction","L","Value","TOT","Total","AVSCORE","Average score","0","Units",,,6,,
+"RUS","Russia","PS_REPH","Homicide rate","L","Value","TOT","Total","RATIO","Ratio","0","Units",,,11.3,,
+"RUS","Russia","WL_EWLH","Employees working very long hours","L","Value","TOT","Total","PC","Percentage","0","Units",,,0.18,,
+"RUS","Russia","WL_TNOW","Time devoted to leisure and personal care","L","Value","TOT","Total","HOUR","Hours","0","Units",,,14.91,"E","Estimated value"
+"RUS","Russia","JE_LMIS","Labour market insecurity","L","Value","TOT","Total","PC","Percentage","0","Units",,,5.1,,
+"RUS","Russia","CG_SENG","Stakeholder engagement for developing regulations","L","Value","TOT","Total","AVSCORE","Average score","0","Units",,,0.8,"E","Estimated value"
+"RUS","Russia","PS_FSAFEN","Feeling safe walking alone at night","L","Value","TOT","Total","PC","Percentage","0","Units",,,52.9,,

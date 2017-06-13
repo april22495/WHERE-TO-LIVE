@@ -1,0 +1,25 @@
+﻿"LOCATION","Country","INDICATOR","Indicator","MEASURE","Measure","INEQUALITY","Inequality","Unit Code","Unit","PowerCode Code","PowerCode","Reference Period Code","Reference Period","Value","Flag Codes","Flags"
+"TUR","Turkey","HO_BASE","Dwellings without basic facilities","L","Value","TOT","Total","PC","Percentage","0","Units",,,7.6,,
+"TUR","Turkey","HO_HISH","Housing expenditure","L","Value","TOT","Total","PC","Percentage","0","Units",,,21,"E","Estimated value"
+"TUR","Turkey","HO_NUMR","Rooms per person","L","Value","TOT","Total","RATIO","Ratio","0","Units",,,1.1,,
+"TUR","Turkey","IW_HADI","Household net adjusted disposable income","L","Value","TOT","Total","USD","US Dollar","0","Units",,,13471,"E","Estimated value"
+"TUR","Turkey","IW_HNFW","Household net financial wealth","L","Value","TOT","Total","USD","US Dollar","0","Units",,,3886,,
+"TUR","Turkey","JE_EMPL","Employment rate","L","Value","TOT","Total","PC","Percentage","0","Units",,,50,,
+"TUR","Turkey","JE_LTUR","Long-term unemployment rate","L","Value","TOT","Total","PC","Percentage","0","Units",,,2.04,,
+"TUR","Turkey","JE_PEARN","Personal earnings","L","Value","TOT","Total","USD","US Dollar","0","Units",,,15992,"E","Estimated value"
+"TUR","Turkey","SC_SNTWS","Quality of support network","L","Value","TOT","Total","PC","Percentage","0","Units",,,84,,
+"TUR","Turkey","ES_EDUA","Educational attainment","L","Value","TOT","Total","PC","Percentage","0","Units",,,36,,
+"TUR","Turkey","ES_STCS","Student skills","L","Value","TOT","Total","AVSCORE","Average score","0","Units",,,462,,
+"TUR","Turkey","ES_EDUEX","Years in education","L","Value","TOT","Total","YR","Years","0","Units",,,16.9,,
+"TUR","Turkey","EQ_AIRP","Air pollution","L","Value","TOT","Total","MICRO_M3","Micrograms per cubic metre","0","Units",,,17,,
+"TUR","Turkey","EQ_WATER","Water quality","L","Value","TOT","Total","PC","Percentage","0","Units",,,63,,
+"TUR","Turkey","CG_VOTO","Voter turnout","L","Value","TOT","Total","PC","Percentage","0","Units",,,85,,
+"TUR","Turkey","HS_LEB","Life expectancy","L","Value","TOT","Total","YR","Years","0","Units",,,76.6,,
+"TUR","Turkey","HS_SFRH","Self-reported health","L","Value","TOT","Total","PC","Percentage","0","Units",,,68,,
+"TUR","Turkey","SW_LIFS","Life satisfaction","L","Value","TOT","Total","AVSCORE","Average score","0","Units",,,5.5,,
+"TUR","Turkey","PS_REPH","Homicide rate","L","Value","TOT","Total","RATIO","Ratio","0","Units",,,1.7,,
+"TUR","Turkey","WL_EWLH","Employees working very long hours","L","Value","TOT","Total","PC","Percentage","0","Units",,,39.26,,
+"TUR","Turkey","WL_TNOW","Time devoted to leisure and personal care","L","Value","TOT","Total","HOUR","Hours","0","Units",,,12.24,"E","Estimated value"
+"TUR","Turkey","JE_LMIS","Labour market insecurity","L","Value","TOT","Total","PC","Percentage","0","Units",,,9.1,,
+"TUR","Turkey","CG_SENG","Stakeholder engagement for developing regulations","L","Value","TOT","Total","AVSCORE","Average score","0","Units",,,2.1,,
+"TUR","Turkey","PS_FSAFEN","Feeling safe walking alone at night","L","Value","TOT","Total","PC","Percentage","0","Units",,,60.4,,

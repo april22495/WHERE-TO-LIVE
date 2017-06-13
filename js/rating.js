@@ -56,13 +56,13 @@ var Life_Satisfaction_list= ["SW_LIFS"];
 var Saftey_list= ["PS_REPH", "PS_FSAFEN"];
 var Work_Life_Balance_list= ["WL_EWLH", "WL_TNOW"];
 
-var measure_list= 
+var m_ind_list= 
 {"Housing": ["HO_BASE", "HO_HISH", "HO_NUMR"], 
 	"Jobs": ["JE_EMPL", "JE_LTUR", "JE_PEARN", "JE_LMIS"],
 	"Education": ["ES_EDUA", "ES_STCS", "ES_EDUEX"],
 	"Civic_Engagement": ["CG_VOTO", "CG_SENG"],
 	"Life_Satisfaction": ["SW_LIFS"],
-	"Work-Life_Balance": ["WL_EWLH", "WL_TNOW"],
+	"Work_Life_Balance": ["WL_EWLH", "WL_TNOW"],
 	"Income":["IW_HADI", "IW_HNFW"], 
 	"Community":["SC_SNTWS"],
 	"Environment": ["EQ_AIRP", "EQ_WATER"],
@@ -71,8 +71,9 @@ var measure_list=
 };
 
 var prev_measure_value=
-["Housing":50 , "Jobs":50, "Education":50, "Civic_Engagement":50, "Life_Satisfaction":50, "Work_Life_Balance":50, "Income":50, "community":50, "Environment":50, "Health":50, "Safety":50];
+{"Housing":50 , "Jobs":50, "Education":50, "Civic_Engagement":50, "Life_Satisfaction":50, "Work_Life_Balance":50, "Income":50, "community":50, "Environment":50, "Health":50, "Safety":50};
 
+var weight_sum=0;
 
 var clist={};
 var minlist={};
@@ -95,6 +96,7 @@ getdata(true).then(function(){
 	//console.log("THEN");
 	normalize();
 	calculate_measure();
+	init_score();
 });
 
 
@@ -158,16 +160,16 @@ function calculate_measure(){
 	for (c in clist){
 		var cobj= clist[c];
 		//console.log(Object.keys(measure_list));
-		for (var measure in measure_list){
+		for (var measure in m_ind_list){
 			var measure_avg= 0;
-			for (i=0 ;i < (measure_list[measure]).length; i++){
+			for (i=0 ;i < (m_ind_list[measure]).length; i++){
 			//for( indicator in measure_list[measure]){
-			  var indicator= (measure_list[measure])[i];
+			  var indicator= (m_ind_list[measure])[i];
 				//console.log(indicator);
 				measure_avg+= cobj[indicator];
 			}
 			//console.log("measure:" + measure);
-			measure_avg= measure_avg/ (measure_list[measure].length);
+			measure_avg= measure_avg/ (m_ind_list[measure].length);
 			cobj[measure]= measure_avg;
 		}
 	}
@@ -257,18 +259,35 @@ function country_score(cname){
 	var cobj= clist[cname];
 	var score= 0;
 	for (i=0; i< 2; i++){//(Object.keys(measure_list)).length; i++){
-		var ind= Object.keys(measure_list)[i];	
+		var ind= Object.keys(m_ind_list)[i];	
 		var weight= document.getElementById(ind).value;
 		var val= cobj[ind];
 		score+= weight* val;
-		console.log(ind+"	value= "+val+", weight= "+weight);
+		//console.log(ind+"	value= "+val+", weight= "+weight);
 	}
-	score= score/(Object.keys(measure_list)).length; 
-	score= score/100.0
+	score= score/(Object.keys(m_ind_list)).length; 
+	score= score/100.0;
 	console.log("Total score: "+ score);
 	return score;
 }
-console.log("length: "+measure_list.length);
+
+function init_score(){
+	for (cname in clist){
+		var cobj= clist[cname];
+		var score= 0;
+		for (i=0; i< (Object.keys(m_ind_list)).length; i++){
+			var ind= Object.keys(m_ind_list)[i];	
+			console.log("- - "+ ind);
+			//if(document.getElementById(ind)==null) console.log("WHY null:"+ ind);
+			var weight= document.getElementById(ind).value;
+			var val= cobj[ind];
+			score+= 50* val;
+			if(i==0) weight_sum+= 50;
+			//console.log(ind+"	value= "+val+", weight= "+50);
+		}
+		cobj["Raw_Score"]= score;
+	}
+}
 
 console.log("indlist:"+indlist.length);
 var measure= document.getElementsByClassName("measure");
@@ -323,9 +342,10 @@ function draw(topo) {
         if(oecd.contains(d.properties.name)) {
           var cobj= clist[d.properties.name];
 					if(cobj=== undefined) return d.properties.color;
-					//var value= parseFloat(cobj["ES_EDUA"]);
-					var value= country_score(d.properties.name);
-					//console.log(value);
+					//var value= country_score(d.properties.name);
+					var value= cobj["Raw_Score"]/ weight_sum;
+					//console.log(d.properties.name+", value: "+value);
+					if( color(value)==="#NaNNaNNaN") console.log("XXXXXXXXXXX"+ d.properties.name+": "+ value);
 					return color(value);
 					/*c=c+1;
 					name = d.properties.name;

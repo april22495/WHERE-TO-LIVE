@@ -1,4 +1,5 @@
-﻿"AUS","Australia","HO_BASE","Dwellings without basic facilities","L","Value","TOT","Total","PC","Percentage","0","Units",,,1.1,"E","Estimated value"
+﻿"LOCATION","Country","INDICATOR","Indicator","MEASURE","Measure","INEQUALITY","Inequality","Unit Code","Unit","PowerCode Code","PowerCode","Reference Period Code","Reference Period","Value","Flag Codes","Flags"
+"AUS","Australia","HO_BASE","Dwellings without basic facilities","L","Value","TOT","Total","PC","Percentage","0","Units",,,1.1,"E","Estimated value"
 "AUS","Australia","HO_HISH","Housing expenditure","L","Value","TOT","Total","PC","Percentage","0","Units",,,20,,
 "AUS","Australia","HO_NUMR","Rooms per person","L","Value","TOT","Total","RATIO","Ratio","0","Units",,,2.3,"E","Estimated value"
 "AUS","Australia","IW_HADI","Household net adjusted disposable income","L","Value","TOT","Total","USD","US Dollar","0","Units",,,33138,,

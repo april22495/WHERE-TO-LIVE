@@ -4,17 +4,50 @@ ftotal= file('reOECD.csv', 'a+')
 inds= ["HO_BASE", "HO_HISH", "HO_NUMR", "IW_HADI", "IW_HNFW", "JE_EMPL", "JE_LTUR", "JE_PEARN", "SC_SNTWS", "ES_EDUA", "ES_STCS", "ES_EDUEX", "EQ_AIRP", "EQ_WATER", "CG_VOTO", "HS_LEB", "HS_SFRH", "SW_LIFS", "PS_REPH", "WL_EWLH", "WL_TNOW", "JE_LMIS", "CG_SENG", "PS_FSAFEN"]
 
 oecd= [
+   "Australia",
+  "Austria",
+  "Belgium",
+  "Canada",
+  "Czech Republic",
+  "Denmark",
+  "Finland",
+  "France",
+  "Germany",
+  "Greece",
+  "Hungary",
+  "Iceland",
+  "Ireland",
+  "Italy",
+  "Japan",
+  "Korea, Republic of",
+  "Luxembourg",
+  "Mexico",
   "Netherlands",
   "New Zealand",
-  "Norway" 
-]
+  "Norway",
+  "Poland",
+  "Portugal",
+  "Slovakia",
+  "Spain",
+  "Sweden",
+  "Switzerland",
+  "Turkey",
+  "United Kingdom",
+  "United States",
+  "Brazil",
+  "Chile",
+  "Estonia",
+  "Israel",
+  "Russian Federation",
+  "Slovenia"
+       ]
 
 for i in range(len(oecd)):
     cname= oecd[i]
     f= file(cname+".csv", 'r')
     country= dict()
     
-    #waste one line(header)
+    #skip one line(header)
     line= f.readline()
 
     while True:
@@ -23,7 +56,7 @@ for i in range(len(oecd)):
         parsed= line.split(",")
         indicator= parsed[2]
         indicator= indicator.replace("\"", "")
-        print indicator
+       # print indicator
         value= parsed[14]
         index= inds.index(indicator)
         country[index]=value
@@ -41,3 +74,4 @@ for i in range(len(oecd)):
         i=i+1
 
     ftotal.write("\n")
+    print cname
