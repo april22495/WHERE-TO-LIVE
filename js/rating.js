@@ -99,9 +99,36 @@ getdata(true).then(function(){
 	normalize();
 	calculate_measure();
 	init_score();
+//	draw_radarchart("Australia");
+
 });
 
+/*
+function draw_radarchart(cname){
+	//produce data
+	var c= clist[cname];
+	var country_data= {"className": cname};
+	var axes= [];
+	for(i=0; i< (Object.keys(m_ind_list)).lenght; i++){
+		var ind= Object.keys(m_ind_list)[i];
+		var value= c[ind];
+		var axis= {"axis": measure, "value": value};
+		axes.push(axis);
+	}
+	country_data["axes"]= axes;
 
+	var chart= RadarChart.chart();
+	var data= [country_data];
+	var w= 600;
+	var h= 600;
+	console.log(data);
+	RadarChart.defaultConfig.radius= 3;
+	RadarChart.defaultConfig.w= w;
+	RadarChart.defaultConfig.h= h;
+	RadarChart.draw("#chart-container", data);
+
+}
+*/
 function init_minmax(){
 	for (i=0; i< indlist.length; i++){
 		var ind= indlist[i];
@@ -505,5 +532,70 @@ function addpoint(lat,lon,text) {
   }
 
 }
+/**
+var data = [
+  {
+    className: 'germany', // optional, can be used for styling
+    axes: [
+      {axis: "strength", value: 13, yOffset: 10},
+      {axis: "intelligence", value: 6},
+      {axis: "charisma", value: 5},  
+      {axis: "dexterity", value: 9},  
+      {axis: "luck", value: 2, xOffset: -20}
+    ]
+  },
+  {
+    className: 'argentina',
+    axes: [
+      {axis: "strength", value: 6},
+      {axis: "intelligence", value: 7},
+      {axis: "charisma", value: 10},  
+      {axis: "dexterity", value: 13},  
+      {axis: "luck", value: 9}
+    ]
+  }
+];
+ */
+/*
+var data = [
+  {
+    className: 'germany', // optional, can be used for styling
+    axes: [
+      {axis: "strength", value: 13, yOffset: 10},
+      {axis: "intelligence", value: 6},
+      {axis: "charisma", value: 5},  
+      {axis: "dexterity", value: 9},  
+      {axis: "luck", value: 2, xOffset: -20}
+    ]
+  },
+  {
+    className: 'argentina',
+    axes: [
+      {axis: "strength", value: 6},
+      {axis: "intelligence", value: 7},
+      {axis: "charisma", value: 10},  
+      {axis: "dexterity", value: 13},  
+      {axis: "luck", value: 9}
+    ]
+  }
+];
+
+$.getScript("js/radar-chart.js", function(){
+    RadarChart.defaultConfig.color = function() {};
+    RadarChart.defaultConfig.radius = 3;
+
+	console.log("HO");	
+		RadarChart.draw(".chart-container", data);
+//  var chart = RadarChart.chart();
+//  var cfg = chart.config(); // retrieve default config
+  // many radars
+//  chart.config({w: cfg.w / 4, h: cfg.h / 4, axisText: false, levels: 0, circles: false});
+//  cfg = chart.config();
 
 
+	RadarChart.defaultConfig.levelTick = true;
+    RadarChart.draw(".chart-container", data);
+ 
+});
+
+*/
