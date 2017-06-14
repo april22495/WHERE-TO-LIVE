@@ -1,7 +1,16 @@
 $('head').append('<script src=\'js/radar-chart.js\'><\/script>');
 
 var colorcode=
-["#a50026","#d73027","#f46d43","#fdae61","#fee08b","#ffffbf","#d9ef8b","#a6d96a","#66bd63","#1a9850","#006837"]
+["#ffffff","#a50026","#d73027","#f46d43","#fdae61","#fee08b","#ffffbf","#d9ef8b","#a6d96a","#66bd63","#1a9850","#006837", "#222222"];
+
+var green_red=
+["#a50026","#d73027","#f46d43","#fdae61","#fee08b","#ffffbf","#d9ef8b","#a6d96a","#66bd63","#1a9850","#006837"];
+
+var blue=
+["#f7fbff","#deebf7","#c6dbef","#9ecae1","#6baed6","#4292c6","#2171b5","#08519c","#08306b"];
+
+var YlGn= ["#ffffe5","#f7fcb9","#d9f0a3","#addd8e","#78c679","#41ab5d","#238443","#006837","#004529"];
+
 
 var oecd= [
   "Australia",
@@ -77,15 +86,16 @@ var negative_ind_list=["HO_BASE","HO_HISH","JE_LTUR","EQ_AIRP","PS_REPH", "WL_EW
 var prev_weights=
 {"Housing":50 , "Jobs":50, "Education":50, "Civic_Engagement":50, "Life_Satisfaction":50, "Work_Life_Balance":50, "Income":50, "Community":50, "Environment":50, "Health":50, "Safety":50};
 
-var weight_sum=0;
+var raw_score={};
+var score_for_color={};
+var weight_sum=550;
 
 var clist={};
 var minlist={};
 var maxlist={};
 
-var rad_chart= d3.select("#container").append("div")
-.attr("id", "radar")
-.attr("display", "none");
+//var rad_chart= d3.select("#r1").append("div")
+//.attr("id", "radar_position")
 
 $(document).ready(function(){
 	resetPage();
@@ -318,11 +328,12 @@ function init_score(){
 			var weight= document.getElementById(ind).value;
 			var val= cobj[ind];
 			score+= 50* val;
-			if(i==0) weight_sum+= 50;
 			//console.log(ind+"	value= "+val+", weight= "+50);
 		}
-		cobj["Raw_Score"]= score;
+		//cobj["Raw_Score"]= score;
+		raw_score[cname]= score;	
 	}
+	calculate_score_for_color();
 }
 
 
@@ -347,17 +358,35 @@ function incremental_score_change(){
 	for(c in clist){
 		console.log(c);
 		var cobj= clist[c];
-		cobj["Raw_Score"]+= (cur-prev)* cobj[change_id];
+		raw_score[c]+= (cur-prev)*cobj[change_id];
+		//cobj["Raw_Score"]+= (cur-prev)* cobj[change_id];
 	}
-	recolor();
 
+	calculate_score_for_color();
+	recolor();
+	
+	var radar_cname= document.getElementById("current_radar").innerHTML;
+	country_radar("#ranking", radar_cname);
 	//redraw();
 }
 
 var color = d3. scale.linear()
-.domain([0, 0.1 , 0.2, 0.3, 0.4, 0.5, 0.6, 0.7, 0.8, 0.9, 1])
-.range( ["#a50026","#d73027","#f46d43","#fdae61","#fee08b","#ffffbf","#d9ef8b","#a6d96a","#66bd63","#1a9850","#006837"] );
+//.domain([0, 0.1 , 0.2, 0.3, 0.4, 0.5, 0.6, 0.7, 0.8, 0.9, 1])
+	.domain([0, 0.125, 0.25, 0.375, 0.5, 0.675, 0.75, 0.875, 1])
+	.range(YlGn);
 
+function calculate_score_for_color(){
+	var values= Object.values(raw_score);
+	var min= Math.min(...values);
+	var max= Math.max(...values);
+	if(max-min==0 || max-min===0) return 0;//;
+	else {
+		var denominator= max-min;
+		for(cname in clist){
+			score_for_color[cname]= (raw_score[cname]-min)/denominator;
+		}	 
+	}
+}
 
 function recolor(){
 	console.log("RECOLOR");
@@ -366,43 +395,41 @@ function recolor(){
 		var cid= cobj["ID"];
 		//console.log(d3.selectAll("path.country")[0][cid]);
 		var item= d3.selectAll("path.country")[0][cid];	
-		var newcolor= color( cobj["Raw_Score"]/ weight_sum);
+		//var newcolor= color( cobj["Raw_Score"]/ weight_sum);
+		var newcolor= color(score_for_color[c]);
 		item.setAttribute("style", "fill: "+newcolor);
 
-		/*
-			 .style("fill", function(d, i){
-			 return color( cobj["Raw_Score"]/ weight_sum);
-			 });
-
-
-			 d3.select(".country")[c]
-			 .attr("fill", color( cobj["Raw_Score"]/ weight_sum)); */
-
-
-		/*var d3_cobj= "\"country#"+c+"\"";
-			d3.select(d3_cobj)
-			.attr("fill", color( cobj["Raw_Score"]/ weight_sum));*/
 	}
 }
 
 function country_radar(div_select, cname){
-	RadarChart.defaultConfig.color = function() {};
+	//RadarChart.defaultConfig.color = function() {};
 	RadarChart.defaultConfig.radius = 3;
-	RadarChart.defaultConfig.w= 200;
-	RadarChart.defaultConfig.h= 200;
+	RadarChart.defaultConfig.w= 180;
+	RadarChart.defaultConfig.h= 180;
+	RadarChart.defaultConfig.colorcode= colorcode;
 
-	var c_data= {"className": cname};
+	var c_data= {"className": "Raw"};
+	var c_w_data= {"className": "Weighted"};
 	var cobj= clist[cname];
 	var axes= [];
+	var w_axes= [];
 	for (m in m_ind_list){
 		var val= cobj[m];
 		var axis={};//{"axis": m, "value":, val};
 		axis["axis"]= m;
-		axis["value"]= val;
+		axis["value"]= val* 1/11.0;
 		axes.push(axis);
+
+		var w_axis={};
+		var w= document.getElementById(m).value;
+		w_axis["axis"]=m;
+		w_axis["value"]= val* w/parseFloat(weight_sum);
+		w_axes.push(w_axis);
 	}	
 	c_data["axes"]= axes;
-	var data= [c_data];
+	c_w_data["axes"]= w_axes;
+	var data= [c_data, c_w_data];
 
 	RadarChart.defaultConfig.levelTick = true;
 	RadarChart.draw(div_select, data); //".chart-container"
@@ -433,22 +460,14 @@ function draw(topo) {
       .attr("id", function(d,i) { return d.id; })
       .attr("title", function(d,i) { return d.properties.name; })
       .style("fill", function(d, i) { 
-        if(oecd.contains(d.properties.name)) {
-          var cobj= clist[d.properties.name];
+				var cname= d.properties.name;
+        if(oecd.contains(cname)) {
+          var cobj= clist[cname];
 					cobj["ID"]= d.id;
 					if(cobj=== undefined) return d.properties.color;
-					//var value= country_score(d.properties.name);
-					var value= cobj["Raw_Score"]/ weight_sum;
-					//console.log(d.properties.name+", value: "+value);
-					if( color(value)==="#NaNNaNNaN") console.log("XXXXXXXXXXX"+ d.properties.name+": "+ value);
-					return color(value);
-					/*c=c+1;
-					name = d.properties.name;
-					if(hasOwnProperty(clist, name)){
-						//console.log(clist[name]);
-					}
-          return d.properties.color;
-					*/
+					var newcolor= color(score_for_color[cname]);
+					//if( newcolor==="#NaNNaNNaN") console.log("XXXXXXXXXXX"+ d.properties.name+": "+ score_for_color[c]);
+					return newcolor;
         }
         else return "#f0f8ff";
 			})
@@ -472,17 +491,18 @@ function draw(topo) {
 				.html(d.properties.name);
 
 			if(oecd.contains(d.properties.name)) {
-				d3.select("#radar").attr("display", "inline");
-				d3.select(".radar-chart").attr("display", "inline");
-				country_radar("#radar", d.properties.name);
+				//d3.select("#radar").attr("display", "inline");
+				//d3.select("#radar-chart").attr("display", "inline");
+				document.getElementById("current_radar").innerHTML= d.properties.name;
+				country_radar("#ranking", d.properties.name);
 				//country_radar(d.properties.name);
 			}
 		})
 	.on("mouseout",  function(d,i) {
 		console.log("out");
 		tooltip.classed("hidden", true);
-		d3.select("#radar").attr("display", "none");
-		d3.select(".radar-chart").attr("display", "none");
+		//d3.select("#radar").attr("display", "none");
+		//d3.select(".radar-chart").attr("display", "none");
 	}); 
 }
  

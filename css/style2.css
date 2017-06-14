@@ -100,9 +100,13 @@ div.tooltip {
 
 }
 
-#radar{
+#radar_position{
 	position: absolute;
 	width: 150px; 
 	height: 150px;
 	padding: 8px; 
+}
+
+#current_radar{
+	text-align: center;
 }
