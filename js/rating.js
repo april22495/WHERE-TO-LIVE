@@ -1,3 +1,5 @@
+$('head').append('<script src=\'js/radar-chart.js\'><\/script>');
+
 var colorcode=
 ["#a50026","#d73027","#f46d43","#fdae61","#fee08b","#ffffbf","#d9ef8b","#a6d96a","#66bd63","#1a9850","#006837"]
 
@@ -255,7 +257,7 @@ function setup(width,height){
       .attr("width", width)
       .attr("height", height)
       .call(zoom)
-      .on("click", click)
+      //.on("click", click)
       .append("g");
 
   g = svg.append("g");
@@ -378,6 +380,29 @@ var color = d3. scale.linear()
 				.attr("fill", color( cobj["Raw_Score"]/ weight_sum));*/
 		}
 	}
+	function country_radar(cname){
+		RadarChart.defaultConfig.color = function() {};
+		RadarChart.defaultConfig.radius = 3;
+		RadarChart.defaultConfig.w= 200;
+		RadarChart.defaultConfig.h= 200;
+
+		var c_data= {"className": cname};
+		var cobj= clist[cname];
+		var axes= [];
+		for (m in m_ind_list){
+			var val= cobj[m];
+			var axis={};//{"axis": m, "value":, val};
+			axis["axis"]= m;
+			axis["value"]= val;
+			axes.push(axis);
+		}	
+		c_data["axes"]= axes;
+		var data= [c_data];
+
+		RadarChart.defaultConfig.levelTick = true;
+		RadarChart.draw(".chart-container", data);
+	}	
+
 
 //draw the map
 function draw(topo) {
@@ -429,13 +454,10 @@ function draw(topo) {
 		}
 		else return "#aaa";
 	})
+	var offsetL = document.getElementById('container').offsetLeft+20;
+	var offsetT = document.getElementById('container').offsetTop+10;
 
-  console.log(c);
-  //offsets for tooltips
-  var offsetL = document.getElementById('container').offsetLeft+20;
-  var offsetT = document.getElementById('container').offsetTop+10;
-
-  //tooltips
+	//tooltips
 	country
 		.on("mousemove", function(d,i) {
 
@@ -445,11 +467,19 @@ function draw(topo) {
 				.attr("style", "left:"+(mouse[0]+offsetL)+"px;top:"+(mouse[1]+offsetT)+"px")
 				.html(d.properties.name);
 
+			if(oecd.contains(d.properties.name)) country_radar(d.properties.name);
+
 		})
 	.on("mouseout",  function(d,i) {
 		tooltip.classed("hidden", true);
 	}); 
 }
+ 
+//$.getScript("js/radar-chart.js", function(){
+	//console.log(c);
+	//offsets for tooltips
+
+//});
 
 function redraw() {
   height = document.getElementById('container').offsetHeight;
@@ -500,13 +530,13 @@ function throttle() {
     }, 200);
 }
 
-
+/*
 //geo translation on mouse click in map
 function click() {
   var latlon = projection.invert(d3.mouse(this));
   //console.log(latlon);
 }
-
+*/
 
 //function to add points and text to the map (used in plotting capitals)
 function addpoint(lat,lon,text) {
@@ -580,11 +610,13 @@ var data = [
     ]
   }
 ];
-*/
+
 $.getScript("js/radar-chart.js", function(){
 	function country_radar(cname){
 		RadarChart.defaultConfig.color = function() {};
 		RadarChart.defaultConfig.radius = 3;
+		RadarChart.defaultConfig.w= 200;
+		RadarChart.defaultConfig.h= 200;
 
 		var c_data= {"className": cname};
 		var cobj= clist[cname];
@@ -605,3 +637,5 @@ $.getScript("js/radar-chart.js", function(){
 
 	country_radar("Australia");
 });
+
+*/

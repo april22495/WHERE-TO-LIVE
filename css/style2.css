@@ -8,10 +8,11 @@
 }
 html, body{
 	height: 100%;
+	font-family: 'Arial';
 }
 
 #container_n_ranking{
-	height: 60%;
+	height: 40%;
 }
 #container {
 	border:2px solid #000;
@@ -74,6 +75,9 @@ div.tooltip {
 	max-width: 20vh; */
 	width: 15%;
 	display: table-cell;
+	text-align: center;
+	font-family: 'Raleway';
+ font-size: 15px;
 }
 
 .slider{
@@ -84,4 +88,14 @@ div.tooltip {
 #chart-container{
 	width: 50%;
 	height: 50%;
+}
+
+#radar_row{
+	width: 90%;
+	height: 20%;
+	display: none;
+}
+
+.radar{
+
 }

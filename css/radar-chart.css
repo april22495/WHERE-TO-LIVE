@@ -8,8 +8,8 @@
   stroke-width: 1;
 }
 .radar-chart .axis .legend {
-  font-family: sans-serif;
-  font-size: 10px;
+  font-family: 'Oswald';
+  font-size: 12px;
 }
 .radar-chart .axis .legend.top {
   dy:1em;
@@ -25,8 +25,8 @@
 }
 
 .radar-chart .tooltip {
-  font-family: sans-serif;
-  font-size: 13px;
+  font-family: 'Oswald';
+  font-size: 15px;
   transition: opacity 200ms;
   opacity: 0;
 }
