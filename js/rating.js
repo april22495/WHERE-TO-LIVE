@@ -83,6 +83,10 @@ var clist={};
 var minlist={};
 var maxlist={};
 
+var rad_chart= d3.select("#container").append("div")
+.attr("id", "radar")
+.attr("display", "none");
+
 $(document).ready(function(){
 	resetPage();
 });
@@ -91,7 +95,7 @@ function resetPage(){
 	var sliders= document.getElementsByClassName("slider");
 	for(var i=0; i< sliders.length; i++){
 		sliders[i].value= 50;
-		console.log(sliders[i].value);
+		//console.log(sliders[i].value);
 	}
 }
 
@@ -170,11 +174,11 @@ function getdata(param){
 
 function normalize(){
 	console.log("normalize-------------\n");
-	console.log(clist);
+	//console.log(clist);
 	
 	for (c in clist){
 		var cobj= clist[c];
-		console.log(Object.keys(cobj));
+		//console.log(Object.keys(cobj));
 		for( var key in cobj){
 			if(maxlist[key]-minlist[key]!=0) {
 				//console.log("c:"+c+"/ key: "+key+ "/cobj: "+cobj[key]+ "/max: "+ maxlist[key]+ "/min: "+ minlist[key]);
@@ -309,7 +313,7 @@ function init_score(){
 		var score= 0;
 		for (i=0; i< (Object.keys(m_ind_list)).length; i++){
 			var ind= Object.keys(m_ind_list)[i];	
-			console.log("- - "+ ind);
+			//console.log("- - "+ ind);
 			//if(document.getElementById(ind)==null) console.log("WHY null:"+ ind);
 			var weight= document.getElementById(ind).value;
 			var val= cobj[ind];
@@ -355,53 +359,54 @@ var color = d3. scale.linear()
 .range( ["#a50026","#d73027","#f46d43","#fdae61","#fee08b","#ffffbf","#d9ef8b","#a6d96a","#66bd63","#1a9850","#006837"] );
 
 
-	function recolor(){
-		console.log("RECOLOR");
-		for(c in clist){
-			var cobj= clist[c];
-			var cid= cobj["ID"];
-			//console.log(d3.selectAll("path.country")[0][cid]);
-			var item= d3.selectAll("path.country")[0][cid];	
-			var newcolor= color( cobj["Raw_Score"]/ weight_sum);
-			item.setAttribute("style", "fill: "+newcolor);
+function recolor(){
+	console.log("RECOLOR");
+	for(c in clist){
+		var cobj= clist[c];
+		var cid= cobj["ID"];
+		//console.log(d3.selectAll("path.country")[0][cid]);
+		var item= d3.selectAll("path.country")[0][cid];	
+		var newcolor= color( cobj["Raw_Score"]/ weight_sum);
+		item.setAttribute("style", "fill: "+newcolor);
 
-			/*
-				.style("fill", function(d, i){
-					return color( cobj["Raw_Score"]/ weight_sum);
-				});
-
-			
-			d3.select(".country")[c]
-				.attr("fill", color( cobj["Raw_Score"]/ weight_sum)); */
+		/*
+			 .style("fill", function(d, i){
+			 return color( cobj["Raw_Score"]/ weight_sum);
+			 });
 
 
-			/*var d3_cobj= "\"country#"+c+"\"";
+			 d3.select(".country")[c]
+			 .attr("fill", color( cobj["Raw_Score"]/ weight_sum)); */
+
+
+		/*var d3_cobj= "\"country#"+c+"\"";
 			d3.select(d3_cobj)
-				.attr("fill", color( cobj["Raw_Score"]/ weight_sum));*/
-		}
+			.attr("fill", color( cobj["Raw_Score"]/ weight_sum));*/
 	}
-	function country_radar(cname){
-		RadarChart.defaultConfig.color = function() {};
-		RadarChart.defaultConfig.radius = 3;
-		RadarChart.defaultConfig.w= 200;
-		RadarChart.defaultConfig.h= 200;
+}
 
-		var c_data= {"className": cname};
-		var cobj= clist[cname];
-		var axes= [];
-		for (m in m_ind_list){
-			var val= cobj[m];
-			var axis={};//{"axis": m, "value":, val};
-			axis["axis"]= m;
-			axis["value"]= val;
-			axes.push(axis);
-		}	
-		c_data["axes"]= axes;
-		var data= [c_data];
+function country_radar(div_select, cname){
+	RadarChart.defaultConfig.color = function() {};
+	RadarChart.defaultConfig.radius = 3;
+	RadarChart.defaultConfig.w= 200;
+	RadarChart.defaultConfig.h= 200;
 
-		RadarChart.defaultConfig.levelTick = true;
-		RadarChart.draw(".chart-container", data);
+	var c_data= {"className": cname};
+	var cobj= clist[cname];
+	var axes= [];
+	for (m in m_ind_list){
+		var val= cobj[m];
+		var axis={};//{"axis": m, "value":, val};
+		axis["axis"]= m;
+		axis["value"]= val;
+		axes.push(axis);
 	}	
+	c_data["axes"]= axes;
+	var data= [c_data];
+
+	RadarChart.defaultConfig.levelTick = true;
+	RadarChart.draw(div_select, data); //".chart-container"
+}	
 
 
 //draw the map
@@ -421,7 +426,6 @@ function draw(topo) {
 
 
   var country = g.selectAll(".country").data(topo);
-
 
   country.enter().insert("path")
       .attr("class", "country")
@@ -467,20 +471,21 @@ function draw(topo) {
 				.attr("style", "left:"+(mouse[0]+offsetL)+"px;top:"+(mouse[1]+offsetT)+"px")
 				.html(d.properties.name);
 
-			if(oecd.contains(d.properties.name)) country_radar(d.properties.name);
-
+			if(oecd.contains(d.properties.name)) {
+				d3.select("#radar").attr("display", "inline");
+				d3.select(".radar-chart").attr("display", "inline");
+				country_radar("#radar", d.properties.name);
+				//country_radar(d.properties.name);
+			}
 		})
 	.on("mouseout",  function(d,i) {
+		console.log("out");
 		tooltip.classed("hidden", true);
+		d3.select("#radar").attr("display", "none");
+		d3.select(".radar-chart").attr("display", "none");
 	}); 
 }
  
-//$.getScript("js/radar-chart.js", function(){
-	//console.log(c);
-	//offsets for tooltips
-
-//});
-
 function redraw() {
   height = document.getElementById('container').offsetHeight;
   width = document.getElementById('container').offsetWidth;
@@ -530,112 +535,4 @@ function throttle() {
     }, 200);
 }
 
-/*
-//geo translation on mouse click in map
-function click() {
-  var latlon = projection.invert(d3.mouse(this));
-  //console.log(latlon);
-}
-*/
 
-//function to add points and text to the map (used in plotting capitals)
-function addpoint(lat,lon,text) {
-
-  var gpoint = g.append("g").attr("class", "gpoint");
-  var x = projection([lat,lon])[0];
-  var y = projection([lat,lon])[1];
-
-  gpoint.append("svg:circle")
-        .attr("cx", x)
-        .attr("cy", y)
-        .attr("class","point")
-        .attr("r", 1.5);
-
-  //conditional in case a point has no associated text
-  if(text.length>0){
-
-    gpoint.append("text")
-          .attr("x", x+2)
-          .attr("y", y+2)
-          .attr("class","text")
-          .text(text);
-  }
-
-}
-/**
-var data = [
-  {
-    className: 'germany', // optional, can be used for styling
-    axes: [
-      {axis: "strength", value: 13, yOffset: 10},
-      {axis: "intelligence", value: 6},
-      {axis: "charisma", value: 5},  
-      {axis: "dexterity", value: 9},  
-      {axis: "luck", value: 2, xOffset: -20}
-    ]
-  },
-  {
-    className: 'argentina',
-    axes: [
-      {axis: "strength", value: 6},
-      {axis: "intelligence", value: 7},
-      {axis: "charisma", value: 10},  
-      {axis: "dexterity", value: 13},  
-      {axis: "luck", value: 9}
-    ]
-  }
-];
- */
-
-/* DATA FORMAT: 
-var data = [
-  {
-    className: 'germany', // optional, can be used for styling
-    axes: [
-      {axis: "strength", value: 13, yOffset: 10},
-      {axis: "intelligence", value: 6},
-      {axis: "charisma", value: 5},  
-      {axis: "dexterity", value: 9},  
-      {axis: "luck", value: 2, xOffset: -20}
-    ]
-  },
-  {
-    className: 'argentina',
-    axes: [
-      {axis: "strength", value: 6},
-      {axis: "intelligence", value: 7},
-      {axis: "charisma", value: 10},  
-      {axis: "dexterity", value: 13},  
-      {axis: "luck", value: 9}
-    ]
-  }
-];
-
-$.getScript("js/radar-chart.js", function(){
-	function country_radar(cname){
-		RadarChart.defaultConfig.color = function() {};
-		RadarChart.defaultConfig.radius = 3;
-		RadarChart.defaultConfig.w= 200;
-		RadarChart.defaultConfig.h= 200;
-
-		var c_data= {"className": cname};
-		var cobj= clist[cname];
-		var axes= [];
-		for (m in m_ind_list){
-			var val= cobj[m];
-			var axis={};//{"axis": m, "value":, val};
-			axis["axis"]= m;
-			axis["value"]= val;
-			axes.push(axis);
-		}	
-		c_data["axes"]= axes;
-		var data= [c_data];
-
-		RadarChart.defaultConfig.levelTick = true;
-		RadarChart.draw(".chart-container", data);
-	}	
-
-	country_radar("Australia");
-});
-
-*/

@@ -96,6 +96,13 @@ div.tooltip {
 	display: none;
 }
 
-.radar{
+.radar-fix{
 
+}
+
+#radar{
+	position: absolute;
+	width: 150px; 
+	height: 150px;
+	padding: 8px; 
 }
