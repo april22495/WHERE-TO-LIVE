@@ -556,7 +556,8 @@ var data = [
   }
 ];
  */
-/*
+
+/* DATA FORMAT: 
 var data = [
   {
     className: 'germany', // optional, can be used for styling
@@ -579,52 +580,8 @@ var data = [
     ]
   }
 ];
-
-$.getScript("js/radar-chart.js", function(){
-    RadarChart.defaultConfig.color = function() {};
-    RadarChart.defaultConfig.radius = 3;
-
-	console.log("HO");	
-		RadarChart.draw(".chart-container", data);
-//  var chart = RadarChart.chart();
-//  var cfg = chart.config(); // retrieve default config
-  // many radars
-//  chart.config({w: cfg.w / 4, h: cfg.h / 4, axisText: false, levels: 0, circles: false});
-//  cfg = chart.config();
-
-
-	RadarChart.defaultConfig.levelTick = true;
-    RadarChart.draw(".chart-container", data);
- 
-});
-
 */
-
 $.getScript("js/radar-chart.js", function(){
-/*	var data = [
-	{
-		className: 'germany', // optional can be used for styling
-		axes: [
-		{axis: "strength", value: 13}, 
-		{axis: "intelligence", value: 6}, 
-		{axis: "charisma", value: 5},  
-		{axis: "dexterity", value: 9},  
-		{axis: "luck", value: 2}
-		]
-	},
-	{
-		className: 'argentina',
-		axes: [
-		{axis: "strength", value: 6}, 
-		{axis: "intelligence", value: 7}, 
-		{axis: "charisma", value: 10},  
-		{axis: "dexterity", value: 13},  
-		{axis: "luck", value: 9}
-		]
-	}
-	];
-*/
-
 	function country_radar(cname){
 		RadarChart.defaultConfig.color = function() {};
 		RadarChart.defaultConfig.radius = 3;
