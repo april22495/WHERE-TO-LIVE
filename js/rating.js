@@ -601,10 +601,7 @@ $.getScript("js/radar-chart.js", function(){
 */
 
 $.getScript("js/radar-chart.js", function(){
-	RadarChart.defaultConfig.color = function() {};
-	RadarChart.defaultConfig.radius = 3;
-
-	var data = [
+/*	var data = [
 	{
 		className: 'germany', // optional can be used for styling
 		axes: [
@@ -626,8 +623,28 @@ $.getScript("js/radar-chart.js", function(){
 		]
 	}
 	];
+*/
 
-	RadarChart.defaultConfig.levelTick = true;
-	RadarChart.draw(".chart-container", data);
+	function country_radar(cname){
+		RadarChart.defaultConfig.color = function() {};
+		RadarChart.defaultConfig.radius = 3;
 
+		var c_data= {"className": cname};
+		var cobj= clist[cname];
+		var axes= [];
+		for (m in m_ind_list){
+			var val= cobj[m];
+			var axis={};//{"axis": m, "value":, val};
+			axis["axis"]= m;
+			axis["value"]= val;
+			axes.push(axis);
+		}	
+		c_data["axes"]= axes;
+		var data= [c_data];
+
+		RadarChart.defaultConfig.levelTick = true;
+		RadarChart.draw(".chart-container", data);
+	}	
+
+	country_radar("Australia");
 });
