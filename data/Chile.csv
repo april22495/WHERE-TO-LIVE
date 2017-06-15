@@ -1,0 +1,25 @@
+﻿"LOCATION","Country","INDICATOR","Indicator","MEASURE","Measure","INEQUALITY","Inequality","Unit Code","Unit","PowerCode Code","PowerCode","Reference Period Code","Reference Period","Value","Flag Codes","Flags"
+"CHL","Chile","HO_BASE","Dwellings without basic facilities","L","Value","TOT","Total","PC","Percentage","0","Units",,,9.4,,
+"CHL","Chile","HO_HISH","Housing expenditure","L","Value","TOT","Total","PC","Percentage","0","Units",,,18,,
+"CHL","Chile","HO_NUMR","Rooms per person","L","Value","TOT","Total","RATIO","Ratio","0","Units",,,1.2,,
+"CHL","Chile","IW_HADI","Household net adjusted disposable income","L","Value","TOT","Total","USD","US Dollar","0","Units",,,15094,"E","Estimated value"
+"CHL","Chile","IW_HNFW","Household net financial wealth","L","Value","TOT","Total","USD","US Dollar","0","Units",,,18172,,
+"CHL","Chile","JE_EMPL","Employment rate","L","Value","TOT","Total","PC","Percentage","0","Units",,,62,,
+"CHL","Chile","JE_LTUR","Long-term unemployment rate","L","Value","TOT","Total","PC","Percentage","0","Units",,,1.67,"E","Estimated value"
+"CHL","Chile","JE_PEARN","Personal earnings","L","Value","TOT","Total","USD","US Dollar","0","Units",,,21370,"E","Estimated value"
+"CHL","Chile","SC_SNTWS","Quality of support network","L","Value","TOT","Total","PC","Percentage","0","Units",,,82,,
+"CHL","Chile","ES_EDUA","Educational attainment","L","Value","TOT","Total","PC","Percentage","0","Units",,,61,,
+"CHL","Chile","ES_STCS","Student skills","L","Value","TOT","Total","AVSCORE","Average score","0","Units",,,436,,
+"CHL","Chile","ES_EDUEX","Years in education","L","Value","TOT","Total","YR","Years","0","Units",,,17.1,,
+"CHL","Chile","EQ_AIRP","Air pollution","L","Value","TOT","Total","MICRO_M3","Micrograms per cubic metre","0","Units",,,18,,
+"CHL","Chile","EQ_WATER","Water quality","L","Value","TOT","Total","PC","Percentage","0","Units",,,71,,
+"CHL","Chile","CG_VOTO","Voter turnout","L","Value","TOT","Total","PC","Percentage","0","Units",,,49,,
+"CHL","Chile","HS_LEB","Life expectancy","L","Value","TOT","Total","YR","Years","0","Units",,,78.8,,
+"CHL","Chile","HS_SFRH","Self-reported health","L","Value","TOT","Total","PC","Percentage","0","Units",,,59,,
+"CHL","Chile","SW_LIFS","Life satisfaction","L","Value","TOT","Total","AVSCORE","Average score","0","Units",,,6.5,,
+"CHL","Chile","PS_REPH","Homicide rate","L","Value","TOT","Total","RATIO","Ratio","0","Units",,,3.8,,
+"CHL","Chile","WL_EWLH","Employees working very long hours","L","Value","TOT","Total","PC","Percentage","0","Units",,,13.84,,
+"CHL","Chile","WL_TNOW","Time devoted to leisure and personal care","L","Value","TOT","Total","HOUR","Hours","0","Units",,,14.91,"E","Estimated value"
+"CHL","Chile","JE_LMIS","Labour market insecurity","L","Value","TOT","Total","PC","Percentage","0","Units",,,8.1,,
+"CHL","Chile","CG_SENG","Stakeholder engagement for developing regulations","L","Value","TOT","Total","AVSCORE","Average score","0","Units",,,1.5,,
+"CHL","Chile","PS_FSAFEN","Feeling safe walking alone at night","L","Value","TOT","Total","PC","Percentage","0","Units",,,50.2,,

@@ -1,0 +1,25 @@
+﻿"LOCATION","Country","INDICATOR","Indicator","MEASURE","Measure","INEQUALITY","Inequality","Unit Code","Unit","PowerCode Code","PowerCode","Reference Period Code","Reference Period","Value","Flag Codes","Flags"
+"ISL","Iceland","HO_BASE","Dwellings without basic facilities","L","Value","TOT","Total","PC","Percentage","0","Units",,,0,,
+"ISL","Iceland","HO_HISH","Housing expenditure","L","Value","TOT","Total","PC","Percentage","0","Units",,,24,,
+"ISL","Iceland","HO_NUMR","Rooms per person","L","Value","TOT","Total","RATIO","Ratio","0","Units",,,1.6,,
+"ISL","Iceland","IW_HADI","Household net adjusted disposable income","L","Value","TOT","Total","USD","US Dollar","0","Units",,,27918,"E","Estimated value"
+"ISL","Iceland","IW_HNFW","Household net financial wealth","L","Value","TOT","Total","USD","US Dollar","0","Units",,,54275,"E","Estimated value"
+"ISL","Iceland","JE_EMPL","Employment rate","L","Value","TOT","Total","PC","Percentage","0","Units",,,82,,
+"ISL","Iceland","JE_LTUR","Long-term unemployment rate","L","Value","TOT","Total","PC","Percentage","0","Units",,,0.67,,
+"ISL","Iceland","JE_PEARN","Personal earnings","L","Value","TOT","Total","USD","US Dollar","0","Units",,,56789,"E","Estimated value"
+"ISL","Iceland","SC_SNTWS","Quality of support network","L","Value","TOT","Total","PC","Percentage","0","Units",,,96,,
+"ISL","Iceland","ES_EDUA","Educational attainment","L","Value","TOT","Total","PC","Percentage","0","Units",,,73,,
+"ISL","Iceland","ES_STCS","Student skills","L","Value","TOT","Total","AVSCORE","Average score","0","Units",,,484,,
+"ISL","Iceland","ES_EDUEX","Years in education","L","Value","TOT","Total","YR","Years","0","Units",,,19.6,,
+"ISL","Iceland","EQ_AIRP","Air pollution","L","Value","TOT","Total","MICRO_M3","Micrograms per cubic metre","0","Units",,,7,,
+"ISL","Iceland","EQ_WATER","Water quality","L","Value","TOT","Total","PC","Percentage","0","Units",,,97,,
+"ISL","Iceland","CG_VOTO","Voter turnout","L","Value","TOT","Total","PC","Percentage","0","Units",,,81,,
+"ISL","Iceland","HS_LEB","Life expectancy","L","Value","TOT","Total","YR","Years","0","Units",,,82.1,,
+"ISL","Iceland","HS_SFRH","Self-reported health","L","Value","TOT","Total","PC","Percentage","0","Units",,,77,,
+"ISL","Iceland","SW_LIFS","Life satisfaction","L","Value","TOT","Total","AVSCORE","Average score","0","Units",,,7.5,,
+"ISL","Iceland","PS_REPH","Homicide rate","L","Value","TOT","Total","RATIO","Ratio","0","Units",,,0.3,,
+"ISL","Iceland","WL_EWLH","Employees working very long hours","L","Value","TOT","Total","PC","Percentage","0","Units",,,13.79,"E","Estimated value"
+"ISL","Iceland","WL_TNOW","Time devoted to leisure and personal care","L","Value","TOT","Total","HOUR","Hours","0","Units",,,14.13,"E","Estimated value"
+"ISL","Iceland","JE_LMIS","Labour market insecurity","L","Value","TOT","Total","PC","Percentage","0","Units",,,0.7,,
+"ISL","Iceland","CG_SENG","Stakeholder engagement for developing regulations","L","Value","TOT","Total","AVSCORE","Average score","0","Units",,,1.6,,
+"ISL","Iceland","PS_FSAFEN","Feeling safe walking alone at night","L","Value","TOT","Total","PC","Percentage","0","Units",,,78.1,,

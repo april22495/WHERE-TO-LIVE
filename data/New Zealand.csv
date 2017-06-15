@@ -1,0 +1,25 @@
+﻿"LOCATION","Country","INDICATOR","Indicator","MEASURE","Measure","INEQUALITY","Inequality","Unit Code","Unit","PowerCode Code","PowerCode","Reference Period Code","Reference Period","Value","Flag Codes","Flags"
+"NZL","New Zealand","HO_BASE","Dwellings without basic facilities","L","Value","TOT","Total","PC","Percentage","0","Units",,,0.3,"E","Estimated value"
+"NZL","New Zealand","HO_HISH","Housing expenditure","L","Value","TOT","Total","PC","Percentage","0","Units",,,23,,
+"NZL","New Zealand","HO_NUMR","Rooms per person","L","Value","TOT","Total","RATIO","Ratio","0","Units",,,2.4,,
+"NZL","New Zealand","IW_HADI","Household net adjusted disposable income","L","Value","TOT","Total","USD","US Dollar","0","Units",,,23213,"E","Estimated value"
+"NZL","New Zealand","IW_HNFW","Household net financial wealth","L","Value","TOT","Total","USD","US Dollar","0","Units",,,81271,"E","Estimated value"
+"NZL","New Zealand","JE_EMPL","Employment rate","L","Value","TOT","Total","PC","Percentage","0","Units",,,74,,
+"NZL","New Zealand","JE_LTUR","Long-term unemployment rate","L","Value","TOT","Total","PC","Percentage","0","Units",,,0.78,,
+"NZL","New Zealand","JE_PEARN","Personal earnings","L","Value","TOT","Total","USD","US Dollar","0","Units",,,45183,"E","Estimated value"
+"NZL","New Zealand","SC_SNTWS","Quality of support network","L","Value","TOT","Total","PC","Percentage","0","Units",,,99,,
+"NZL","New Zealand","ES_EDUA","Educational attainment","L","Value","TOT","Total","PC","Percentage","0","Units",,,74,,
+"NZL","New Zealand","ES_STCS","Student skills","L","Value","TOT","Total","AVSCORE","Average score","0","Units",,,509,,
+"NZL","New Zealand","ES_EDUEX","Years in education","L","Value","TOT","Total","YR","Years","0","Units",,,18,,
+"NZL","New Zealand","EQ_AIRP","Air pollution","L","Value","TOT","Total","MICRO_M3","Micrograms per cubic metre","0","Units",,,9,,
+"NZL","New Zealand","EQ_WATER","Water quality","L","Value","TOT","Total","PC","Percentage","0","Units",,,92,,
+"NZL","New Zealand","CG_VOTO","Voter turnout","L","Value","TOT","Total","PC","Percentage","0","Units",,,77,,
+"NZL","New Zealand","HS_LEB","Life expectancy","L","Value","TOT","Total","YR","Years","0","Units",,,81.4,,
+"NZL","New Zealand","HS_SFRH","Self-reported health","L","Value","TOT","Total","PC","Percentage","0","Units",,,90,,
+"NZL","New Zealand","SW_LIFS","Life satisfaction","L","Value","TOT","Total","AVSCORE","Average score","0","Units",,,7.4,,
+"NZL","New Zealand","PS_REPH","Homicide rate","L","Value","TOT","Total","RATIO","Ratio","0","Units",,,1.2,,
+"NZL","New Zealand","WL_EWLH","Employees working very long hours","L","Value","TOT","Total","PC","Percentage","0","Units",,,13.78,,
+"NZL","New Zealand","WL_TNOW","Time devoted to leisure and personal care","L","Value","TOT","Total","HOUR","Hours","0","Units",,,14.87,,
+"NZL","New Zealand","JE_LMIS","Labour market insecurity","L","Value","TOT","Total","PC","Percentage","0","Units",,,4.9,,
+"NZL","New Zealand","CG_SENG","Stakeholder engagement for developing regulations","L","Value","TOT","Total","AVSCORE","Average score","0","Units",,,2.5,,
+"NZL","New Zealand","PS_FSAFEN","Feeling safe walking alone at night","L","Value","TOT","Total","PC","Percentage","0","Units",,,64.4,,

@@ -1,0 +1,25 @@
+﻿"LOCATION","Country","INDICATOR","Indicator","MEASURE","Measure","INEQUALITY","Inequality","Unit Code","Unit","PowerCode Code","PowerCode","Reference Period Code","Reference Period","Value","Flag Codes","Flags"
+"LVA","Latvia","HO_BASE","Dwellings without basic facilities","L","Value","TOT","Total","PC","Percentage","0","Units",,,14.7,,
+"LVA","Latvia","HO_HISH","Housing expenditure","L","Value","TOT","Total","PC","Percentage","0","Units",,,26,,
+"LVA","Latvia","HO_NUMR","Rooms per person","L","Value","TOT","Total","RATIO","Ratio","0","Units",,,1.2,,
+"LVA","Latvia","IW_HADI","Household net adjusted disposable income","L","Value","TOT","Total","USD","US Dollar","0","Units",,,13655,,
+"LVA","Latvia","IW_HNFW","Household net financial wealth","L","Value","TOT","Total","USD","US Dollar","0","Units",,,9837,,
+"LVA","Latvia","JE_EMPL","Employment rate","L","Value","TOT","Total","PC","Percentage","0","Units",,,66,,
+"LVA","Latvia","JE_LTUR","Long-term unemployment rate","L","Value","TOT","Total","PC","Percentage","0","Units",,,4.67,,
+"LVA","Latvia","JE_PEARN","Personal earnings","L","Value","TOT","Total","USD","US Dollar","0","Units",,,22270,"E","Estimated value"
+"LVA","Latvia","SC_SNTWS","Quality of support network","L","Value","TOT","Total","PC","Percentage","0","Units",,,84,,
+"LVA","Latvia","ES_EDUA","Educational attainment","L","Value","TOT","Total","PC","Percentage","0","Units",,,90,,
+"LVA","Latvia","ES_STCS","Student skills","L","Value","TOT","Total","AVSCORE","Average score","0","Units",,,494,,
+"LVA","Latvia","ES_EDUEX","Years in education","L","Value","TOT","Total","YR","Years","0","Units",,,17.8,"E","Estimated value"
+"LVA","Latvia","EQ_AIRP","Air pollution","L","Value","TOT","Total","MICRO_M3","Micrograms per cubic metre","0","Units",,,12,,
+"LVA","Latvia","EQ_WATER","Water quality","L","Value","TOT","Total","PC","Percentage","0","Units",,,76,,
+"LVA","Latvia","CG_VOTO","Voter turnout","L","Value","TOT","Total","PC","Percentage","0","Units",,,59,,
+"LVA","Latvia","HS_LEB","Life expectancy","L","Value","TOT","Total","YR","Years","0","Units",,,74.1,,
+"LVA","Latvia","HS_SFRH","Self-reported health","L","Value","TOT","Total","PC","Percentage","0","Units",,,50,"E","Estimated value"
+"LVA","Latvia","SW_LIFS","Life satisfaction","L","Value","TOT","Total","AVSCORE","Average score","0","Units",,,5.9,,
+"LVA","Latvia","PS_REPH","Homicide rate","L","Value","TOT","Total","RATIO","Ratio","0","Units",,,6.1,,
+"LVA","Latvia","WL_EWLH","Employees working very long hours","L","Value","TOT","Total","PC","Percentage","0","Units",,,2.45,,
+"LVA","Latvia","WL_TNOW","Time devoted to leisure and personal care","L","Value","TOT","Total","HOUR","Hours","0","Units",,,13.83,,
+"LVA","Latvia","JE_LMIS","Labour market insecurity","L","Value","TOT","Total","PC","Percentage","0","Units",,,8,"E","Estimated value"
+"LVA","Latvia","CG_SENG","Stakeholder engagement for developing regulations","L","Value","TOT","Total","AVSCORE","Average score","0","Units",,,2.4,"E","Estimated value"
+"LVA","Latvia","PS_FSAFEN","Feeling safe walking alone at night","L","Value","TOT","Total","PC","Percentage","0","Units",,,61.6,,
