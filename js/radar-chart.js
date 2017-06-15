@@ -41,10 +41,15 @@ var RadarChart = {
           return datum;
         });
 
+				/*
         var maxValue = Math.max(cfg.maxValue, d3.max(data, function(d) {
           return d3.max(d.axes, function(o){ return o.value; });
         }));
         maxValue -= cfg.minValue;
+				*/
+
+				var maxValue= cfg.maxValue;
+				var minValue= cfg.minValue;
 
         var allAxis = data[0].axes.map(function(i, j){ return {name: i.axis, xOffset: (i.xOffset)?i.xOffset:0, yOffset: (i.yOffset)?i.yOffset:0}; });
         var total = allAxis.length;

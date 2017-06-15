@@ -94,6 +94,7 @@ var clist={};
 var minlist={};
 var maxlist={};
 
+var save_num=0;
 //var rad_chart= d3.select("#r1").append("div")
 //.attr("id", "radar_position")
 
@@ -304,7 +305,7 @@ function country_score(cname){
 	console.log("country_score called");
 	var cobj= clist[cname];
 	var score= 0;
-	for (i=0; i< 2; i++){//(Object.keys(measure_list)).length; i++){
+	for (i=0; i< (Object.keys(measure_list)).length; i++){
 		var ind= Object.keys(m_ind_list)[i];	
 		var weight= document.getElementById(ind).value;
 		var val= cobj[ind];
@@ -343,7 +344,26 @@ for(var i=0; i<slider_bars.length; i++){
 	slider_bars[i].addEventListener("input", function(e) {incremental_score_change.call(this);} );
 
 }
-
+/*
+var pin_button= document.getElementById("pin");
+pin_button.on("click", save_radar);
+*/
+function save_radar(){
+	console.log("SAVE entered");
+	if(save_num>=4) {
+		alert("Can save chart only up to 4");
+		return;
+	}
+	document.getElementById("radar_row").style.display="block";
+	var cname= document.getElementById("current_radar").innerHTML;
+	var save_nth= "r"+ save_num;
+	var save_pos= save_nth+"_c";
+	var save_id_w= "#"+save_nth+"_w";
+	var save_id= "#"+save_nth;
+	document.getElementById(save_pos).innerHTML= cname;
+	country_radar(save_id, save_id_w, cname);
+	save_num++;
+}
 //document.getElementById("HO_BASE").addEventListener("input", incremental_score_change);
 
 function incremental_score_change(){
@@ -365,9 +385,17 @@ function incremental_score_change(){
 	calculate_score_for_color();
 	recolor();
 	
+	// no need to ichange the radar chart if not weighted
 	var radar_cname= document.getElementById("current_radar").innerHTML;
-	country_radar("#ranking", radar_cname);
-	//redraw();
+	//country_radar("#c_radar","#w_radar", radar_cname);
+	country_radar_weight("#w_radar", radar_cname);
+
+	for(var i=0; i<save_num; i++){
+		var wid= "#r"+i+"_w";
+		var saveId= "r"+i+"_c";
+		var cname= document.getElementById(saveId).innerHTML;
+		country_radar_weight(wid, cname);
+	}
 }
 
 var color = d3. scale.linear()
@@ -402,38 +430,133 @@ function recolor(){
 	}
 }
 
-function country_radar(div_select, cname){
+function minmin(){
+	var min=100000;
+	for(c in clist){
+		var cobj= clist[c];
+		for(m in m_ind_list){
+			if(cobj[m]< min) min= cobj[m];
+		}	
+	}
+	return min;
+}
+
+function maxmax(){
+	var max=-100000;
+	for(c in clist){
+		var cobj= clist[c];
+		for(m in m_ind_list){
+			if(cobj[m]> max) max= cobj[m];
+		}	
+	}
+	return max;
+}
+
+function cmin(c){
+	var min=1000000;
+	var cobj= clist[c];
+	for(m in m_ind_list){
+		if(cobj[m]<min) min= cobj[m];
+	}	
+	return min;
+}
+
+function cmax(c){
+	var max=-100000;
+	var cobj= clist[c];
+	for(m in m_ind_list){
+		if(cobj[m]> max) max= cobj[m];
+	}	
+	return max;
+}
+
+function wmax(){
+	var max=-100000;
+	for(m in m_ind_list){
+		var v= document.getElementById(m).value;
+		console.log(v);
+		if(max< (v/weight_sum)) max= v/weight_sum;
+	}
+	return max*11;
+}
+
+function country_radar(div_select, div_select_2, cname){
 	//RadarChart.defaultConfig.color = function() {};
 	RadarChart.defaultConfig.radius = 3;
-	RadarChart.defaultConfig.w= 180;
-	RadarChart.defaultConfig.h= 180;
+	RadarChart.defaultConfig.w= 175;
+	RadarChart.defaultConfig.h= 150;
 	RadarChart.defaultConfig.colorcode= colorcode;
+
+	RadarChart.defaultConfig.minValue= minmin();
+	RadarChart.defaultConfig.maxValue= maxmax();
 
 	var c_data= {"className": "Raw"};
 	var c_w_data= {"className": "Weighted"};
 	var cobj= clist[cname];
+	//console.log(cobj);
 	var axes= [];
 	var w_axes= [];
+	//for (var i=0; i< m_ind_list.length; i++){
 	for (m in m_ind_list){
+		//var m= Object.keys(m_ind_list)[i];
 		var val= cobj[m];
 		var axis={};//{"axis": m, "value":, val};
 		axis["axis"]= m;
-		axis["value"]= val* 1/11.0;
+		axis["value"]= val; //* 1/11.0;
 		axes.push(axis);
-
+	
 		var w_axis={};
 		var w= document.getElementById(m).value;
 		w_axis["axis"]=m;
-		w_axis["value"]= val* w/parseFloat(weight_sum);
+		w_axis["value"]= val* w/parseFloat(weight_sum) *11;
 		w_axes.push(w_axis);
 	}	
 	c_data["axes"]= axes;
 	c_w_data["axes"]= w_axes;
-	var data= [c_data, c_w_data];
+	var data= [c_data];
+	var w_data=[c_w_data];
 
 	RadarChart.defaultConfig.levelTick = true;
 	RadarChart.draw(div_select, data); //".chart-container"
+
+	RadarChart.defaultConfig.minValue= 0;
+	RadarChart.defaultConfig.maxValue= wmax();
+	RadarChart.draw(div_select_2, w_data);
 }	
+
+
+function country_radar_weight(div_select,  cname){
+	//RadarChart.defaultConfig.color = function() {};
+	RadarChart.defaultConfig.radius = 3;
+	RadarChart.defaultConfig.w= 175;
+	RadarChart.defaultConfig.h= 150;
+	RadarChart.defaultConfig.colorcode= colorcode;
+
+	var c_w_data= {"className": "Weighted"};
+	var cobj= clist[cname];
+	//console.log(cobj);
+	var w_axes= [];
+	//for (var i=0; i< m_ind_list.length; i++){
+	for (m in m_ind_list){
+		//var m= Object.keys(m_ind_list)[i];
+		var val= cobj[m];
+	
+		var w_axis={};
+		var w= document.getElementById(m).value;
+		w_axis["axis"]=m;
+		w_axis["value"]= val* w/parseFloat(weight_sum) *11;
+		w_axes.push(w_axis);
+	}	
+	c_w_data["axes"]= w_axes;
+	var w_data=[c_w_data];
+
+	RadarChart.defaultConfig.minValue= 0;
+	RadarChart.defaultConfig.maxValue= wmax();
+
+	RadarChart.defaultConfig.levelTick = true;
+	RadarChart.draw(div_select, w_data); //".chart-container"
+}	
+
 
 
 //draw the map
@@ -494,7 +617,8 @@ function draw(topo) {
 				//d3.select("#radar").attr("display", "inline");
 				//d3.select("#radar-chart").attr("display", "inline");
 				document.getElementById("current_radar").innerHTML= d.properties.name;
-				country_radar("#ranking", d.properties.name);
+				country_radar("#c_radar", "#w_radar", d.properties.name);
+				document.getElementById("pin").style.display="inline";
 				//country_radar(d.properties.name);
 			}
 		})

@@ -13,20 +13,46 @@
   <h1>Where To Live</h1>
   <p>What Matters Most to You? </p>
 
+	<div id= "vertical_1">
+
 	<div id= "container_n_ranking">
 		<div id="container"></div>
-		<div id="ranking">
+		<div id="chart">
 			<p id= "current_radar"></p>
+			<img id="pin" src="pin2.png" width= 30px onclick="save_radar()" > 
+			<div id= "c_radar"></div>
+			<div id="w_radar"></div>
 		</div>
-
-	</div>
-
 	<div id= "radar_row">
-		<div class="radar-fix" id="r1"></div>
-		<div class="radar-fix" id="r2"></div>
-		<div class="radar-fix" id="r3"></div>
-		<div class="radar-fix" id="r4"></div>
+		<div class="radar-fix" id="r0">
+			<p id="r0_c"></p>
+		</div>
+		<div class="radar-fix" id="r1">
+			<p id="r1_c"></p>
+		</div>
+		<div class="radar-fix" id="r2">
+			<p id="r2_c"></p>
+		</div>
+		<div class="radar-fix" id="r3">
+			<p id="r3_c"></p>
+		</div>
 	</div>
+
+	<div id= "radar_row_w">
+		<div class="radar-fix" id="r0_w">
+		</div>
+		<div class="radar-fix" id="r1_w">
+		</div>
+		<div class="radar-fix" id="r2_w">
+		</div>
+		<div class="radar-fix" id="r3_w">
+		</div>
+	</div>
+
+	</div>
+
+	</div>
+
 	<div class="row">
 		<div class="measure">
 			<p>Housing</p>
@@ -81,7 +107,9 @@
 		</div>
 	</div>
 	<div class= "chart-container"></div>	
+	</div>
 
+	<div id= "vertical_2"></div>
 	<script src='https://code.jquery.com/jquery-3.1.0.min.js'></script> 
 	<script src="js/d3.min.js"></script>
 	<script src="js/topojson.v1.min.js"></script>
