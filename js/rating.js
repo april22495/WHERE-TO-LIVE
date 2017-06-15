@@ -184,7 +184,7 @@ function getdata(param){
 }
 
 function normalize(){
-	console.log("normalize-------------\n");
+	//console.log("normalize-------------\n");
 	//console.log(clist);
 	
 	for (c in clist){
@@ -203,7 +203,7 @@ function normalize(){
 }
 
 function calculate_measure(){
-	console.log("calculate_measure-----------------");
+	//console.log("calculate_measure-----------------");
 	for (c in clist){
 		var cobj= clist[c];
 		//console.log(Object.keys(measure_list));
@@ -267,7 +267,7 @@ function setup(width,height){
 
   path = d3.geo.path().projection(projection);
 
-  console.log("height: "+height);
+  //console.log("height: "+height);
   svg = d3.select("#container").append("svg")
       .attr("width", width)
       .attr("height", height)
@@ -302,7 +302,7 @@ function hasOwnProperty(obj, prop) {
 }
 
 function country_score(cname){	
-	console.log("country_score called");
+	//console.log("country_score called");
 	var cobj= clist[cname];
 	var score= 0;
 	for (i=0; i< (Object.keys(measure_list)).length; i++){
@@ -314,7 +314,7 @@ function country_score(cname){
 	}
 	score= score/(Object.keys(m_ind_list)).length; 
 	score= score/100.0;
-	console.log("Total score: "+ score);
+	//console.log("Total score: "+ score);
 	return score;
 }
 
@@ -374,9 +374,9 @@ function incremental_score_change(){
 	prev_weights[change_id]= cur;
 
 	weight_sum+= (cur-prev);
-	console.log("CHANGE: "+change_id);
+	//console.log("CHANGE: "+change_id);
 	for(c in clist){
-		console.log(c);
+		//console.log(c);
 		var cobj= clist[c];
 		raw_score[c]+= (cur-prev)*cobj[change_id];
 		//cobj["Raw_Score"]+= (cur-prev)* cobj[change_id];
@@ -474,7 +474,7 @@ function wmax(){
 	var max=-100000;
 	for(m in m_ind_list){
 		var v= document.getElementById(m).value;
-		console.log(v);
+	//	console.log(v);
 		if(max< (v/weight_sum)) max= v/weight_sum;
 	}
 	return max*11;
