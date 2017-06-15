@@ -623,7 +623,7 @@ function draw(topo) {
 			}
 		})
 	.on("mouseout",  function(d,i) {
-		console.log("out");
+		//console.log("out");
 		tooltip.classed("hidden", true);
 		//d3.select("#radar").attr("display", "none");
 		//d3.select(".radar-chart").attr("display", "none");
